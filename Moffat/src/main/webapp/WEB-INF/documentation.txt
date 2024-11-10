@@ -1,0 +1,112 @@
+//
+
+Jaci Brown
+CSD 430- Server-Side Module 11 & 12
+Please review for details of changes to each file.
+Also, please view app in full screen browser
+as I did not have patience for the css.
+
+My war file is configured for Apache 9
+using eclipse and Java se 21 and the jdbc driver for mySQL 8.0
+with a schema named craftmart_employee. 
+DB credentials are hard coded into the DataAccess definition.
+
+\	Config:
+\
+\	Web.xml
+\	-------
+\	Identify the welcome page.
+\	Name the servlet and class
+\	Set url mapping for when we want to call the server.
+\		In this position I used a fake site name to get to the server and then it forwarded to final page.
+\
+\	displayStaff.tld
+\	---------
+\	Set up a custom tag by declaring this file, a name, and a class in general xml format. 
+\
+
+
+
+]	Java:craftmartTools
+]
+]	CMServlet.java
+]	--------------
+]	I have left a little console logging to show the flow.
+]
+]	The doPost method is called by a form on add.jsp to add a new employee
+]	In the doPost method here I struggled to pull a value from the request to verify. The context path was pretty useless
+]	and the action parameter was null regardless of trying manual url manipulation
+]	So this would be a vulnerability I would address before a full launch. 
+]
+]	Essentially I create an object for the form data
+]	Retrieve form data from session and re-store as object employee.
+]	Setup a DataAccess bean. On init it connects to the db,
+]		deletes any previous table that exists in the database,
+]		creates a new table, and populates it.
+]	Have the DAO add the new employee.
+]	Finally pull a query for all (only option currently)
+]	Save the list to the session and forward to view
+]
+]	EmployeeBean.java
+]	-----------------
+]	The first class we use is the employee Bean. 
+]	This just holds information about a person in an object with getters and setters
+]	for each value.
+]
+]	Ideally here I would add much more validation to reject bad input
+]	for the goal was functionality first.
+]
+]	DataAccess.java
+]	--------------
+]	This bean actually does most of the work
+]	It holds several attributes like the full
+]	display list it creates, and handles creating the table,
+]	populating it, and updating it.
+]
+]	At this stage, since all elements are from the db
+]	or beans, all data should be 'clean'
+]
+]	DisplayStaff.java
+]	-----------------
+]	This class is our tag support for displaying the data.
+]	To prevent using scriptlets in jsp and jsf tags
+]		I created one tag that does all of it since 
+]		the task is the same every time.
+]	The tag gets the list from the session and iterates
+]	through all items to display them with a jspWriter
+]	in java.
+]
+]
+
+=	JSP: View
+=
+=	index.jsp
+=	==========
+=	Here is a simple landing page, mostly for it to look nice.
+=	 
+=	add.jsp
+=	==========
+=	In this view a form is presented in doPost
+=	I tried to use a bean, but all the values of this bean remained null
+=	The attempts are in the beginning of doPost because I think
+=	it could save a lot of lines. But they're already written for now. 
+=
+=	On submit, the servlet is called. 
+=	This pulls in the form data, adds it to the db after
+=	setup, and forwards to: 
+=
+=	team.jsp
+=	==========
+=	This view features a custom tag library containing
+=	my one needed tag to display the db info from the objects
+=	Some divs for the css continuation and then the custom tag
+=	that executes DisplayStaff.doTag()
+=	and a home button because why not
+=
+=	craftmartStyle.css
+=	========
+=	I usually enjoy css, but I didn't have time to do it
+=	how I saw in my mind. Or add any more features (for now!)
+=	I just went with functionality mainly.
+=	It's readable, has a color and some flow.
+=
