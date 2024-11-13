@@ -13,10 +13,17 @@
 		<servlet-name>MBServlet</servlet-name>
 		<servlet-class>MBTools.MBServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
+	<servlet-mapping> 
 		<servlet-name>MBServlet</servlet-name>
-		<url-pattern>/addTeam.html</url-pattern>
-		<!--  added the star -->
+		<url-pattern>/MBServlet</url-pattern>
+		 
+	</servlet-mapping>
+
+<!-- I think Jon wrote this with html changes -->
+
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

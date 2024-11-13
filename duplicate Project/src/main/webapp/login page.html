@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page - Moffat Bay Resorts</title>
+<link rel="stylesheet" href="loginpage.css">
+</head>
+<body>
+
+<div class="welcome-message">
+  Welcome to Moffat Bay Resorts
+</div>
+
+<div class="login-container">
+  <h2>Login</h2>
+  <form class="login-form" action="/submit-login" method="post">
+    <label for="reservation-id">Reservation ID:</label>
+    <div style="display: flex; gap: 15px;">
+      <input type="text" id="reservation-id" name="reservation-id" placeholder="Enter Reservation ID" required>
+      <button type="button" class="search-button">Search</button>
+    </div>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="Login">
+  </form>
+
+  <div class="create-account-link">
+    <p>Don't have an account? <a href="/create-account">Create a new username/password</a></p>
+  </div>
+</div>
+
+<div class="top-tabs">
+  <a href="#">Home</a>
+  <a href="#">About Us</a>
+  <a href="#">Contact</a>
+</div>
+
+</body>
+</html>

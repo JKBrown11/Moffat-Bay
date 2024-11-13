@@ -12,7 +12,7 @@ public class CustomerBean  {
 	private String phone;
 	private String email;
 	private String hashedPassword;
-	
+	private String regPass;
 	//private String query;
 	
 	
@@ -53,7 +53,7 @@ public class CustomerBean  {
 	}
 
 	public void setHashedPassword(String regPass) {
-		String pwQualifiers;//create regEx for password min 8 chars, lower, upper, number
+		String pwQualifiers="/\\w/";//create regEx for password min 8 chars, lower, upper, number
 			
 		if (regPass.matches(pwQualifiers)) {
 			
@@ -64,9 +64,20 @@ public class CustomerBean  {
 				System.out.println("Password failed ");
 				this.hashedPassword = null;
 			}
-			else this.hashedPassword = result;
+			else {
+				this.hashedPassword = result;
+				this.regPass = null; //delete sensitive data. Destroyed after pw successfully hashed. 
+			}
 		}
 		
+	}
+
+	public String getRegPass() {
+		return regPass;
+	}
+
+	public void setRegPass(String regPass) {
+		this.regPass = regPass;
 	}
 	
 	

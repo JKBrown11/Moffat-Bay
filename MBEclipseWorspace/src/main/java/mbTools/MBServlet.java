@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MBServlet
  */
-@WebServlet({"/craftmart"})
+@WebServlet
 public class MBServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L; //creates serializable
@@ -35,9 +35,16 @@ public class MBServlet extends HttpServlet {
 	 * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		//Beans are still giving me some grief because I couldn't use some of the features in jsp
-		//so I had to do it the long way, but storing things as objects is very convenient. It's like
-		//buildable format on the fly. 
+		
+		String action = request.getParameter("action");
+		if (action != null) {
+			switch (action){
+			case "register":
+				
+			
+			}
+		}
+		
 		
 		//This handles the doPost from add.jsp. We don't currently have a switch set up to read differences between 
 		//where the doPost comes from in servlet world. 
@@ -55,31 +62,31 @@ public class MBServlet extends HttpServlet {
 		System.out.println(registerNew.getPhone());
 		
 		registerNew.setRegPass(request.getParameter("regPass"));
-		System.out.println(registerNew.getRegPass());
+		//System.out.println(registerNew.getRegPass());
 		
 	
 		//this sets the new employee as a session object available by name
 		//to anything in the session scope.
-		request.getSession().setAttribute("empBean", registerNew);
+		//request.getSession().setAttribute("empBean", registerNew);
 		
 		
 		//I was able to isolate the db access more successfully than in module 8. This gave me
 		//the least trouble of everything this time.
-		try {
-			DataAccess daoBean = new DataAccess();
-			daoBean.addBeans(registerNew);
-			daoBean.setQueryRes();
-			request.getSession().setAttribute("printList", daoBean.getQueryRes());
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();}
-		catch (SQLException e) {
-			e.printStackTrace();}
-		
-		//Logic complete, send response
-		RequestDispatcher rd = request.getRequestDispatcher("/team.jsp");
-		rd.forward(request, response);
-		System.out.println("forwarded to team.jsp");
+//		try {
+//			DataAccess daoBean = new DataAccess();
+//			daoBean.addBeans(registerNew);
+//			daoBean.setQueryRes();
+//			request.getSession().setAttribute("printList", daoBean.getQueryRes());
+//		}
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();}
+//		catch (SQLException e) {
+//			e.printStackTrace();}
+//		
+//		//Logic complete, send response
+//		RequestDispatcher rd = request.getRequestDispatcher("/team.jsp");
+//		rd.forward(request, response);
+//		System.out.println("forwarded to team.jsp");
 		
 	}//end doPOst
 
