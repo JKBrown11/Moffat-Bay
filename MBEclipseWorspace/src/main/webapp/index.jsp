@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Moffat Bay Lodge</title>
-<style><%@include file="mbStyle.css"%></style>
+<style><%@include file="loginpage.css"%></style>
 
 </head>
 	<div class="header">
@@ -22,7 +22,7 @@
 	<div class="logo">
 	div class logo
 		<h3>Some words</h3><br/>
-		<a href="/registration.html">Registration</a>	
+		<a href="MoffatBay/registration.html">Registration</a>	
 	</div> 
 
 </body>

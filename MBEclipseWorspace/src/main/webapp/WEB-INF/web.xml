@@ -11,7 +11,7 @@
 
 	<servlet>
 		<servlet-name>MBServlet</servlet-name>
-		<servlet-class>MBTools.MBServlet</servlet-class>
+		<servlet-class>mbTools.MBServlet</servlet-class>
 	</servlet>
 	<servlet-mapping> 
 		<servlet-name>MBServlet</servlet-name>
@@ -21,9 +21,9 @@
 
 <!-- I think Jon wrote this with html changes -->
 
-	<servlet-mapping>
-    	<servlet-name>default</servlet-name>
-    	<url-pattern>/images/*</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!--     	<servlet-name>default</servlet-name> -->
+<!--     	<url-pattern>/images/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
 </web-app>
