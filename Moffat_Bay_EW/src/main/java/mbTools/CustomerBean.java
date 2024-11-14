@@ -11,6 +11,7 @@ public class CustomerBean  {
 	private String lastName;
 	private String phone;
 	private String email;
+	private int age;// The DB has age, it isn't required, do we want it?
 	private String hashedPassword;
 	private String regPass;
 	//private String query;
@@ -78,7 +79,18 @@ public class CustomerBean  {
 
 	public void setRegPass(String regPass) {
 		this.regPass = regPass;
+		//auto update hashed pass
+		setHashedPassword(regPass);
 	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
 	
 	
 	

@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: url('beach.jpg') no-repeat center top, #65e9f0;
+  background: url('beach.jpg') no-repeat center top, #64b5c1;/*previous value: #65e9f0, Jaci trying out darker from discord image*/
   background-size: 100% 75%, 100% 50%;
   background-attachment: fixed;
   display: flex;
@@ -42,7 +42,7 @@ body {
 .welcome-message {
   text-align: center;
   font-size: 24px;
-  color: #64b5c1;
+  color: #65e9f0; /* Switching here too*/
   margin-top: 40px;
   margin-bottom: 10px;
   font-weight: bold;

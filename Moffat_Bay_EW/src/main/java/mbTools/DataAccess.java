@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class DataAccess {
 
-	private String username ="root";
-	private String password = "PASSWORD";
-	private String databaseURL= "jdbc:mysql://localhost:3306/MoffatBayLodge";
+	private String username ="group1_dev";
+	private String password = "pass";
+	private String databaseURL= "jdbc:mysql://localhost:3306/mbLodge";
 	private Connection conn;
 	private Statement stmt;
 	private ArrayList<CustomerBean> queryRes = new ArrayList<>();
@@ -47,32 +47,32 @@ public class DataAccess {
 	public void setDatabaseURL(String databaseURL) {this.databaseURL = databaseURL;	}
 	
 	
-	public ArrayList<CustomerBean> getQueryRes(){return this.queryRes;}
-	public void setQueryRes(){	
-		String requestStaff="SELECT * FROM craftmart_employee.staff";
-		try {
-			ResultSet rset = stmt.executeQuery(requestStaff);
-			while (rset.next()) {
-				
-				CustomerBean staff = new CustomerBean();
-				staff.setFirstName(rset.getString(1));//all customer data i'm pulling is currently string, so next should work?
-				staff.setLastName(rset.getString(2));
-				staff.setEmail(rset.getString(3));
-				staff.setPhone(rset.getString(4));
-				
-				
-				this.queryRes.add(staff);
-		
-			}//end while
-			
-		System.out.println("Query array complete");
-		this.disconn();
-		}//end try
-		catch (SQLException e) {
-			e.getMessage();
-		}
-		
-	}
+//	public ArrayList<CustomerBean> getQueryRes(){return this.queryRes;}
+//	public void setQueryRes(){	
+//		
+//		try {
+//			ResultSet rset = stmt.executeQuery();
+//			while (rset.next()) {
+//				
+//				CustomerBean cust = new CustomerBean();
+//				cust.setFirstName(rset.getString(1));//all customer data i'm pulling is currently string, so next should work?
+//				cust.setLastName(rset.getString(2));
+//				cust.setEmail(rset.getString(3));
+//				cust.setPhone(rset.getString(4));
+//				
+//				
+//				this.queryRes.add(cust);
+//		
+//			}//end while
+//			
+//		System.out.println("Query array complete");
+//		this.disconn();
+//		}//end try
+//		catch (SQLException e) {
+//			e.getMessage();
+//		}
+//		
+//	}
 
 	/*
 	 * This method takes a bean (made from form data in the servlet) 
@@ -80,14 +80,14 @@ public class DataAccess {
 	 *  Table is wiped each time due to requirements of jsp creating 
 	 *  the table and populating it.
 	 * */
-	public void addBeans(CustomerBean empBean) {
+	public void addBeans(CustomerBean newCust) {
 		//create sql query from empBean data
 		//run makeUpdate with string
 		
-		String addBean= "INSERT INTO `db_name`.`db_table`"
-				+ "(firstName, lastName, email, phone)"
-				+" VALUES('" + empBean.getFirstName() +"','" + empBean.getLastName() +"','"
-				+ empBean.getEmail() +"','"+ empBean.getPhone() + "')";
+		String addBean= "INSERT INTO `mbLodge`.`customer_data`"
+				+ "(firstName, lastName, email, age, phone, hashedPass)"
+				+" VALUES('" + newCust.getFirstName() +"','" + newCust.getLastName() +"','"
+				+ newCust.getEmail() + "','" + newCust.getAge() +"','"+ newCust.getPhone() + "')";
 		
 		System.out.println(addBean);
 		makeUpdate(addBean);

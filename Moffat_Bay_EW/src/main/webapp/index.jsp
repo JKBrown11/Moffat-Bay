@@ -22,7 +22,7 @@
 	<div class="logo">
 	div class logo
 		<h3>Some words</h3><br/>
-		<a href="MoffatBay/registration.html">Registration</a>	
+		<a href="/registration.html">Registration</a>	
 	</div> 
 
 </body>
