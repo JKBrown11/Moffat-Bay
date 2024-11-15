@@ -16,7 +16,7 @@
 
 <div class="registration-container">
   <h2>Create an Account</h2>
-  <form class="registration-form" action="MoffatBay/MBServlet" method="post">
+  <form class="registration-form" action="/MoffatBay/MBServlet" method="post">
   	  	
   	<label for="firstName">First Name:</label>
     <input type="text" id="firstName" name="firstName" placeholder="First" required>
