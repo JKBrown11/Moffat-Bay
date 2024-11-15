@@ -18,15 +18,15 @@ CREATE TABLE customer_data (
     email VARCHAR(50) UNIQUE NOT NULL PRIMARY KEY,
     age INT,
     phone VARCHAR(12) NOT NULL,
-    hashedPass VARCHAR(45) NOT NULL,
+    hashedPass VARCHAR(128) NOT NULL,
     customerID INT NOT NULL UNIQUE AUTO_INCREMENT
 );
 -- provide some starter data
 INSERT INTO customer_data (firstName, lastName, email, age, phone, hashedPass)
 VALUES 
-    ('Bob', 'Barker', 'bobker@example.com', 99, '555-123-1234', ''),
-    ('Mary', 'Lamb', 'littlebah@example.com', 34, '555-124-1234', ''),
-    ('Winston', 'Candelabra', 'beourguest@example.com', 47, '555-142-1234', '');
+    ('Bob', 'Barker', 'bobker@example.com', 99, '555-123-1234', 'test'),
+    ('Mary', 'Lamb', 'littlebah@example.com', 34, '555-124-1234', 'test'),
+    ('Winston', 'Candelabra', 'beourguest@example.com', 47, '555-142-1234', 'test');
 
 -- Store reservation details
 CREATE TABLE Reservations (

@@ -36,12 +36,7 @@ public class MBServlet extends HttpServlet {
 				
 		String from = request.getParameter("myrequest");
 		System.out.println("The value of hidden input 'myrequest' is " + from);
-		Enumeration <String> allParam = request.getParameterNames();
-		System.out.println(allParam.toString());
 		
-		while (allParam.hasMoreElements()) {
-			System.out.println(allParam.nextElement());
-		}
 		
 		if (from != null) {
 			switch (from){
@@ -49,26 +44,18 @@ public class MBServlet extends HttpServlet {
 				//the customer beans do  not have input sani as of 11/14/24 1:44 CST
 				CustomerBean registerNew = new CustomerBean();
 				registerNew.setFirstName(request.getParameter("firstName"));
-				System.out.println(registerNew.getFirstName());
-				
-				registerNew.setLastName(request.getParameter("lastName"));
-				System.out.println(registerNew.getLastName());
-				
+				registerNew.setLastName(request.getParameter("lastName"));				
 				registerNew.setEmail(request.getParameter("email"));
-				System.out.println(registerNew.getEmail());
-				
 				registerNew.setPhone(request.getParameter("phone"));
-				System.out.println(registerNew.getPhone());
-				
 				registerNew.setAge(request.getParameter("age"));
-				System.out.println(registerNew.getAge());
-				
-				registerNew.setRegPass(request.getParameter("regPass"));
-				//System.out.println(registerNew.getRegPass());
+				String regPass = request.getParameter("regPass");
+				registerNew.setRegPass(regPass);
+				System.out.println("Form values received. ");
 				
 				try {
+					//This uses the DataAccess class to load the driver, and connect.
 					DataAccess daoBean = new DataAccess();
-					daoBean.addBeans(registerNew);
+					daoBean.addBeans(registerNew); //This inserts a new customer to db. Currently shows null for hashed pass. 
 				}
 				catch (ClassNotFoundException e) {
 					e.printStackTrace();}
@@ -76,9 +63,12 @@ public class MBServlet extends HttpServlet {
 					e.printStackTrace();}
 				
 				System.out.println("customer added to db");
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/login.html");
 				rd.forward(request, response);
-				System.out.println("forwarded to team.jsp");
+				
+				System.out.println("forwarded to login.html");
+				
 			case "login":
 				
 			}

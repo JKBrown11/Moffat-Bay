@@ -8,11 +8,13 @@ public class MBEncrpt {
 	
 	//returns our byte digest as a string or our hashedPass
 	public String hashItOut(String regPass) {
+		System.out.println(regPass);
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			
 			md.update(regPass.getBytes());
 			String hashedIt = md.digest().toString();//very very simple transposition for simplicity
+			System.out.println(regPass);
 			return hashedIt;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
