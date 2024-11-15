@@ -87,7 +87,7 @@ public class DataAccess {
 		String addBean= "INSERT INTO `mbLodge`.`customer_data`"
 				+ "(firstName, lastName, email, age, phone, hashedPass)"
 				+" VALUES('" + newCust.getFirstName() +"','" + newCust.getLastName() +"','"
-				+ newCust.getEmail() + "','" + newCust.getAge() +"','"+ newCust.getPhone() + "')";
+				+ newCust.getEmail() + "','" + newCust.getAge() + "','"+ newCust.getPhone() + "','" + newCust.getHashedPassword() + "')";
 		
 		System.out.println(addBean);
 		makeUpdate(addBean);
