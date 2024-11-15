@@ -55,7 +55,7 @@ public class MBServlet extends HttpServlet {
 				try {
 					//This uses the DataAccess class to load the driver, and connect.
 					DataAccess daoBean = new DataAccess();
-					daoBean.addBeans(registerNew); //This inserts a new customer to db. Currently shows null for hashed pass. 
+					daoBean.addBeans(registerNew); //This inserts a new customer to db. 
 				}
 				catch (ClassNotFoundException e) {
 					e.printStackTrace();}
