@@ -60,6 +60,9 @@ public class MBServlet extends HttpServlet {
 				registerNew.setPhone(request.getParameter("phone"));
 				System.out.println(registerNew.getPhone());
 				
+				registerNew.setAge(request.getParameter("age"));
+				System.out.println(registerNew.getAge());
+				
 				registerNew.setRegPass(request.getParameter("regPass"));
 				//System.out.println(registerNew.getRegPass());
 				
@@ -73,7 +76,7 @@ public class MBServlet extends HttpServlet {
 					e.printStackTrace();}
 				
 				System.out.println("customer added to db");
-				RequestDispatcher rd = request.getRequestDispatcher("MoffatBay/login.html");
+				RequestDispatcher rd = request.getRequestDispatcher("/login.html");
 				rd.forward(request, response);
 				System.out.println("forwarded to team.jsp");
 			case "login":
