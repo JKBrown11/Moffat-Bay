@@ -59,7 +59,7 @@ public class CustomerBean  {
 		System.out.println("Checking for error points");	
 		if (regPass.matches(pwQualifiers)) {
 			System.out.println("Password passed reg Ex");
-			MBEncrpt enc = new MBEncrpt();
+			MBEncrypt enc = new MBEncrypt();
 			System.out.println("Encrypt object created");
 			String result= enc.hashItOut(regPass);
 			if (result.contains("There was an error. Please try again")){

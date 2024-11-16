@@ -44,7 +44,7 @@
   </form>
 
   <div class="login-link">
-    <p>Already have an account? <a href="/login">Login here</a></p>
+    <p>Already have an account? <a href="/MoffatBay/login.html">Login here</a></p>
   </div>
 </div>
 

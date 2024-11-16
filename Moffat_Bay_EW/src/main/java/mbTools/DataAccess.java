@@ -47,32 +47,7 @@ public class DataAccess {
 	public void setDatabaseURL(String databaseURL) {this.databaseURL = databaseURL;	}
 	
 	
-//	public ArrayList<CustomerBean> getQueryRes(){return this.queryRes;}
-//	public void setQueryRes(){	
-//		
-//		try {
-//			ResultSet rset = stmt.executeQuery();
-//			while (rset.next()) {
-//				
-//				CustomerBean cust = new CustomerBean();
-//				cust.setFirstName(rset.getString(1));//all customer data i'm pulling is currently string, so next should work?
-//				cust.setLastName(rset.getString(2));
-//				cust.setEmail(rset.getString(3));
-//				cust.setPhone(rset.getString(4));
-//				
-//				
-//				this.queryRes.add(cust);
-//		
-//			}//end while
-//			
-//		System.out.println("Query array complete");
-//		this.disconn();
-//		}//end try
-//		catch (SQLException e) {
-//			e.getMessage();
-//		}
-//		
-//	}
+
 
 	/*
 	 * This method takes a bean (made from form data in the servlet) 
@@ -89,10 +64,32 @@ public class DataAccess {
 				+" VALUES('" + newCust.getFirstName() +"','" + newCust.getLastName() +"','"
 				+ newCust.getEmail() + "','" + newCust.getAge() + "','"+ newCust.getPhone() + "','" + newCust.getHashedPassword() + "')";
 		
-		System.out.println(addBean);
 		makeUpdate(addBean);
 		System.out.println("Bean added");
 	}
+	
+	public String queryEmailpw(String sqlQuery) {
+		System.out.println("running makeQuery from DAO");
+		ResultSet sqlOutput;
+		String returnedHash;
+		try {
+			sqlOutput = stmt.executeQuery(sqlQuery);
+			if (sqlOutput!= null) {
+				//System.out.println(status);
+				sqlOutput.next();
+				returnedHash = sqlOutput.getString(1);
+				System.out.println("Return value from db: " + returnedHash);
+				return returnedHash;				
+			}	
+			
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			return "Something went wrong";
+		}
+		return "error";
+	}
+	////////--------------------------------------------------
 	
 	public String makeUpdate(String sqlQuery) {
 		Integer status;

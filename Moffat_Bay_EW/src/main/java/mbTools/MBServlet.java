@@ -68,9 +68,31 @@ public class MBServlet extends HttpServlet {
 				rd.forward(request, response);
 				
 				System.out.println("forwarded to login.html");
-				
+				break;
+			
 			case "login":
+				String email = request.getParameter("email");
+				String unhashed= request.getParameter("regPass");
+				System.out.println("The value of unhashed is: " + unhashed);
 				
+				MBValidator vali = new MBValidator();
+				boolean success = vali.validateLogin(email, unhashed);
+				System.out.println("Results of login: " + success);
+				
+				if (!success) {
+					RequestDispatcher errPage = request.getRequestDispatcher("/loginError.html");
+					errPage.forward(request, response);
+					
+					System.out.println("forwarded to loginError.html");
+					break;
+				}
+				else {
+					RequestDispatcher loginSuccess = request.getRequestDispatcher("/index.jsp");
+					loginSuccess.forward(request, response);
+					
+					System.out.println("forwarded to index.jsp");
+					break;
+				}
 			}
 		}
 		
