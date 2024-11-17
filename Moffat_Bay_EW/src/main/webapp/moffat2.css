@@ -33,6 +33,18 @@ body {
   background-color: #4CAF50;
 }
 
+.check-in {
+	  padding: 5px 15px;
+}
+
+.check-out {
+	  padding: 5px 15px;
+}
+
+.guests {
+	  padding: 5px 15px;
+}
+
 .content-section {
   padding: 40px 10px;
   text-align: center;
@@ -82,4 +94,12 @@ body {
 
 .reservation-link:hover {
   color: #333;
+}
+
+.bed-options {
+	display: grid;
+  padding: 1px 15px;
+  gap: 5px;
+  min-width: 100px;
+  margin: 5px auto;
 }

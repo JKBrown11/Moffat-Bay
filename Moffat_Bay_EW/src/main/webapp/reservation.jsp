@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moffat Bay Lodge - Book Your Trip</title>
-    <style><%@include file="mbStyle.css"%></style>
+    <style><%@include file="moffat2.css"%></style>
     
 </head>
 <body>
@@ -14,29 +14,29 @@
     <h1>Moffat Bay Lodge</h1>
 </header>
 
-<div class="nav">
-    <a href="#">Home</a>
-    <a href="#">Activities</a>
-    <a href="#">Book Your Trip</a>
-    <a href="#">Trip Look Up</a>
-</div>
+  <div class="top-tabs">
+    <a href="/MoffatBay/MoffatHome.html">Home</a>
+    <a href="#tab2">Amenities</a>
+    <a href="#tab3">Activities</a>
+    <a href="#tab4">Contact Us</a>
+  </div>
 
 <div class="container">
     <h2>Book Your Trip!</h2>
     <p>You must have an account to book a trip. You will be prompted to login or register as necessary before your trip is confirmed.</p>
     
     <form action="bookingServlet" method="POST">
-        <div>
+        <div class="check-in">
             <label for="checkInDate">Check-in Date:</label><br>
             <input type="date" id="checkInDate" name="checkInDate" class="calendar-input" required>
         </div>
 
-        <div>
+        <div class="check-out">
             <label for="checkOutDate">Check-out Date:</label><br>
             <input type="date" id="checkOutDate" name="checkOutDate" class="calendar-input" required>
         </div>
         
-        <div>
+        <div class="guests">
             <label for="guests">Number of Guests:</label><br>
             <select id="guests" name="guests" class="dropdown" required>
                 <option value="">Select number of guests</option>
