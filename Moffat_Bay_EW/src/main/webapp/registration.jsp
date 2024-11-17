@@ -14,6 +14,12 @@
   Welcome to Moffat Bay Resorts
 </div>
 
+<div class="top-tabs">
+  <a href="/MoffatBay/MoffatHome.html">Home</a>
+  <a href="#">About Us</a>
+  <a href="#">Contact</a>
+</div>
+
 <div class="registration-container">
   <h2>Create an Account</h2>
   <form class="registration-form" action="/MoffatBay/MBServlet" method="post">
@@ -48,11 +54,7 @@
   </div>
 </div>
 
-<div class="top-tabs">
-  <a href="#">Home</a>
-  <a href="#">About Us</a>
-  <a href="#">Contact</a>
-</div>
+
 
 </body>
 </html>
