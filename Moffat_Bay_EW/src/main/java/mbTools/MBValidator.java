@@ -39,7 +39,7 @@ public class MBValidator {
 					System.out.println("queryRes for email not null: "+ queryRes);
 				}
 				else return false;
-				if(queryRes == hashedTest) {
+				if(queryRes.equals(hashedTest)) {
 					validPass = true;
 					System.out.println("email query returned matching pass hash");
 				}

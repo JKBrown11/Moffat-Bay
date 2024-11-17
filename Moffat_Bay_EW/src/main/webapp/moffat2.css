@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: url('/Users/BigJ/Desktop/HTML/beach.jpg') no-repeat center top, #65e9f0;
+  background: url('') no-repeat center top, #65e9f0;
   background-size: 100% 75%, 100% 50%;
   background-attachment: fixed;
 }
@@ -48,7 +48,7 @@ body {
 .content-section {
   padding: 40px 10px;
   text-align: center;
-  background: url('/Users/BigJ/Desktop/HTML/content-background.jpg') no-repeat center center;
+  background: url('') no-repeat center center;
   background-size: cover;
 }
 

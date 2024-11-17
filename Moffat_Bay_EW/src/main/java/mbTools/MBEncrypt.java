@@ -1,6 +1,7 @@
 package mbTools;
 // Reference https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -13,7 +14,9 @@ public class MBEncrypt {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			
 			md.update(regPass.getBytes());
-			String hashedIt = md.digest().toString();//very very simple transposition for simplicity
+			byte[] myDigest = md.digest();
+			BigInteger bigIntDigest= new BigInteger(1, myDigest);
+			String hashedIt = bigIntDigest.toString();
 			
 			return hashedIt;
 		} catch (NoSuchAlgorithmException e) {
