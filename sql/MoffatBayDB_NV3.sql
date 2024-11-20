@@ -26,7 +26,8 @@ INSERT INTO customer_data (firstName, lastName, email, age, phone, hashedPass)
 VALUES 
     ('Bob', 'Barker', 'bobker@example.com', 99, '555-123-1234', 'test'),
     ('Mary', 'Lamb', 'littlebah@example.com', 34, '555-124-1234', 'test'),
-    ('Winston', 'Candelabra', 'beourguest@example.com', 47, '555-142-1234', 'test');
+    ('Winston', 'Candelabra', 'beourguest@example.com', 47, '555-142-1234', 'test'),
+    ('James', 'Patrick', 'oreo@whitefudge.com', 42, '555-867-5309', '20801734176305237020310068239086505145815731288986330710045825798527104737195'); -- For testing the pw is Hotel8one 
 
 -- Store reservation details
 CREATE TABLE Reservations (

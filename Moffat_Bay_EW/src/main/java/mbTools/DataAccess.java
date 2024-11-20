@@ -14,7 +14,7 @@ public class DataAccess {
 	private String databaseURL= "jdbc:mysql://localhost:3306/mbLodge";
 	private Connection conn;
 	private Statement stmt;
-	private ArrayList<CustomerBean> queryRes = new ArrayList<>();
+	//private ArrayList<CustomerBean> queryRes = new ArrayList<>();
 	
 	/*
 	 *Method to create dao operator. Object creation handles driver,
@@ -51,9 +51,8 @@ public class DataAccess {
 
 	/*
 	 * This method takes a bean (made from form data in the servlet) 
-	 * and adds it to the database for the duration of the session only.
-	 *  Table is wiped each time due to requirements of jsp creating 
-	 *  the table and populating it.
+	 * and adds it to the database for the duration of the local machine database only.
+	 *  Table is not yet updated to retain all data. 
 	 * */
 	public void addBeans(CustomerBean newCust) {
 		//create sql query from empBean data
@@ -105,11 +104,38 @@ public class DataAccess {
 		return status.toString();
 	}
 
-	/*
-	 * The prompt asked us to create a table and populate it 'in the jsp'. 
-	 * This occurs each time the servlet is called to add a member.
-	 * */
-	
+	public int makeQueryCount(String sqlQuery) {
+		ResultSet countResult;
+		int count = -1;
+		try{
+			countResult= stmt.executeQuery(sqlQuery);
+			if (countResult != null) {
+				countResult.next();
+				count = countResult.getInt(1);
+				return count;
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+		
+	}
+
+	public boolean makeReservationUpdate(String sqlQuery) {
+		
+		Integer status;
+		try {
+			status = stmt.executeUpdate(sqlQuery);
+			System.out.println("The results of insert update are: " + status);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 
 	//disconnect from db
 	public void disconn() throws SQLException {

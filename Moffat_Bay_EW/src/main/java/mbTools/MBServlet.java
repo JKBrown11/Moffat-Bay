@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MBServlet
@@ -81,13 +82,23 @@ public class MBServlet extends HttpServlet {
 				System.out.println("Results of login: " + success);
 				
 				if (!success) {
-					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.html");
+					//Login failed
+					//set session error message to retrieve on error page
+					String errorMessage = "Your login was not successful due to incorrect email or password.";
+					HttpSession session = request.getSession();
+					session.setAttribute("errorMessage", errorMessage);
+					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
 					errPage.forward(request, response);
 					
-					System.out.println("forwarded to loginError.html");
+					System.out.println("forwarded to loginError.jsp");
 					break;
 				}
-				else {
+				else {//login successful, add user to session as bean
+					CustomerBean loggedInUser = new CustomerBean();
+					loggedInUser.setEmail(email);
+					HttpSession userSess = request.getSession();
+					userSess.setAttribute("loggedInUser", loggedInUser);
+					
 					RequestDispatcher loginSuccess = request.getRequestDispatcher("/reservation.html");
 					loginSuccess.forward(request, response);
 					
@@ -96,30 +107,71 @@ public class MBServlet extends HttpServlet {
 				}//end else
 				
 			case "book":
-				String roomType = request.getParameter("roomType");
-				String checkIn = request.getParameter("checkInDate");
-				String checkOut = request.getParameter("checkOutDate");
-				Integer numGuests = Integer.parseInt(request.getParameter("numGuests"));
-				
-				ReservationBean resRequest = new ReservationBean();
-				resRequest.setRoomType(roomType);
-				resRequest.setCheckInDate(checkIn);
-				resRequest.setCheckOutDate(checkOut);
-				resRequest.setNumGuests(numGuests);
-				
-				MBValidator mbVali = new MBValidator();
-				boolean available = mbVali.validateStay(resRequest);
-				
-				if (available) {
-					//send to reservation confirmation
+				System.out.println("Case acknowledged book request");
+				HttpSession userSess = request.getSession();
+				CustomerBean customer = (CustomerBean) userSess.getAttribute("loggedInUser");
+				try {
+					if (customer.getEmail()== null) {//no email saved in session for user
+						
+					}
+				}
+				catch (NullPointerException e) {
+					e.printStackTrace();
+					//error, send to login
+					String errorMessage = "You must be logged in to book a trip.";
+					userSess.setAttribute("errorMessage", errorMessage);
+					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
+					errPage.forward(request, response);
 					break;
 				}
+				catch (Exception ex) {ex.printStackTrace();}
+				
+				if (userSess.getAttribute("loggedInUser")!=null) {
+					
+					String roomType = request.getParameter("roomType");
+					String checkIn = request.getParameter("checkInDate");
+					String checkOut = request.getParameter("checkOutDate");
+					Integer numGuests = Integer.parseInt(request.getParameter("numGuests"));
+					
+					ReservationBean resRequest = new ReservationBean();
+					resRequest.setRoomType(roomType);
+					resRequest.setCheckInDate(checkIn);
+					resRequest.setCheckOutDate(checkOut);
+					resRequest.setNumGuests(numGuests);
+					
+					System.out.println("Reservation bean ready for checking");
+					
+					MBValidator mbVali = new MBValidator();
+					boolean available = mbVali.validateStay(resRequest, customer);
+				
+					
+					if (available) {
+						//send to reservation confirmation
+						RequestDispatcher confirm = request.getRequestDispatcher("reservationSummary.jsp");
+						confirm.forward(request, response);
+						break;
+					}
+					else {
+						//send back to reservation page with error message
+						String errorMessage = "The bed you selected is not available for the beginning of your stay.";
+						userSess.setAttribute("errorMessage", errorMessage);
+						RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
+						errPage.forward(request, response);
+						break;
+					}}
 				else {
-					//send back to reservation page with error message
+					String errorMessage = "You must be logged in to make a reservation.";
+					userSess.setAttribute("errorMessage", errorMessage);
+					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
+					errPage.forward(request, response);
 					break;
 				}
-			}//end switch
-		}//end if
+				
+				}//end switch
+			}//end ifs
+		
+			
+		
 	}//end doPost	
 }//end Class		
 		

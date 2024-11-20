@@ -2,9 +2,13 @@ package mbTools;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 public class MBValidator {
 	
-	
+	public MBValidator() {
+		System.out.println("Validator Object Created");
+	}
 	//Validate customer fields
 	// if(firstName != null && firstName.matches("/\\w*\\s\\w*/"))// This should allow for one or two first names separated by white space.
 	
@@ -65,11 +69,55 @@ public class MBValidator {
 		
 	}
 	
-public boolean validateStay(ReservationBean stayRequest){
+	public boolean validateStay(ReservationBean stayRequest, CustomerBean customer){
+	
+	//get all dates, check all
+	
+	//create query to search database. Should return integer value.
+	String searchNight = "SELECT COUNT( CASE WHEN check_in_date = '"+ stayRequest.getCheckInDate() + 
+			"' AND bed_size = '" + stayRequest.getRoomType() + "' THEN reservation_number END) AS date_and_bed FROM reservations";
 		
-		//create query to search database
+	//query this string
+	try{
+		DataAccess valiDAO = new DataAccess();
+		int count = valiDAO.makeQueryCount(searchNight);
+		//check result for availability ==2, no
 		//limit reservations to two per day per room type
-		return true;
+		if (count >= 2) {
+			//There are no more rooms that day
+			System.out.println("Reservation rejected for room availability");
+			return false; //validateStay is false
+		}
+		else {
+			//reservation is available
+			//login requirement enforced in servlet
+			
+			//pull user email to link to proper customer account
+			String newReservationQuery = "INSERT into mblodge.reservations(email, check_in_date, check_out_date,"
+					+ "bed_size, party_size) VALUES ('" + customer.getEmail() + "', '" 
+					+ stayRequest.getCheckInDate() + "', '" + stayRequest.getCheckOutDate() + "', '" 
+					+ stayRequest.getRoomType() + "', '" + stayRequest.getNumGuests() + "')";
+			System.out.println("The insert query is: " + newReservationQuery);
+			
+			//call update function with valiDAO
+			valiDAO.makeReservationUpdate(newReservationQuery);
+			return true;
+			
+			//check success
+			
+			//forward to reservation summary
+		}
+		
+	}
+	catch(ClassNotFoundException e) {
+		e.printStackTrace();
+	}
+	catch(SQLException sql) {
+		sql.printStackTrace();
+	}
+	
+	
+	return false;
 	}
 
 }
