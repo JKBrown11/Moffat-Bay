@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moffat Bay Lodge - Book Your Trip</title>
-    <style><%@include file="moffat2.css"%></style>
+    <style><%@include file="CSS/moffat2.css"%></style>
     
 </head>
 <body>

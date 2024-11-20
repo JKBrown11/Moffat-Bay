@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moffat Bay Reservation</title>
+  <link rel="stylesheet" href="CSS/reservationpage.css">
+</head>
+<body>
+  <div class="background-image"></div>
+
+  <a href="index.html" class="logo">
+    <img src="" alt="Moffat Bay Logo" width="100">
+  </a>
+
+  <div class="resort-name">Moffat Bay Resorts</div>
+
+  <div class="top-tabs">
+    <a href="/MoffatBay/MoffatHome.html">Home</a>
+    <a href="#tab2">Amenities</a>
+    <a href="#tab3">Activities</a>
+    <a href="#tab4">Contact Us</a>
+    <a href="/MoffatBay/login.html">Login</a>
+  </div>
+
+  <div class="content-section">
+    <h1>Reserve Your Stay at Moffat Bay Resort</h1>
+    <form action="/MoffatBay/MBServlet" method="POST" class="reservation-form">
+      <div class="form-grid">
+        <div class="form-item">
+          <label for="roomType">Room Type:</label>
+          <select id="roomType" name="roomType" required>
+            <option value="2Full">Standard - 2 Full - $120/night</option>
+            <option value="Queen">Deluxe - 1 Queen - $135/night</option>
+            <option value="2Queen">Formal - 2 Queen - $150/night</option>
+            <option value="King">Presidential - 1 King - $160/night</option>
+          </select>
+        </div>
+        <div class="form-item">
+            <div class="check-in">
+            	<label for="checkInDate">Check-in Date:</label><br>
+            	<input type="date" id="checkInDate" name="checkInDate" class="calendar-input" required>
+        	</div>
+
+        	<div class="check-out">
+            	<label for="checkOutDate">Check-out Date:</label><br>
+            	<input type="date" id="checkOutDate" name="checkOutDate" class="calendar-input" required>
+        	</div>
+        </div>
+        <div class="form-item">
+          <label for="numNights">Number of guests:</label>
+          <input type="number" id="numGuests" name="numGuests" min="1" max="5" required>
+        </div>
+<!--         <div class="form-item"> -->
+<!--           <label for="specialRequests">Special Requests:</label> -->
+<!--           <textarea id="specialRequests" name="specialRequests" placeholder="E.g., Early check-in, extra pillows, etc." rows="4"></textarea> -->
+<!--         </div> -->
+        
+        
+<!--         <div class="form-item"> -->
+<!--           <label for="specialOccasion">Special Occasion:</label> -->
+<!--           <select id="specialOccasion" name="specialOccasion"> -->
+<!--             <option value="none">None</option> -->
+<!--             <option value="anniversary">Anniversary</option> -->
+<!--             <option value="birthday">Birthday</option> -->
+<!--             <option value="honeymoon">Honeymoon</option> -->
+<!--             <option value="other">Other</option> -->
+<!--           </select> -->
+<!--         </div> -->
+      </div>
+      <input type="hidden" name="myrequest" value="book"/>
+      <button type="submit" class="reservation-btn">Submit Reservation</button>
+    </form>
+  </div>
+
+  <a href="/MoffatBay/MoffatHome.html" class="back-link">&larr; Back to Home</a>
+</body>
+</html>
