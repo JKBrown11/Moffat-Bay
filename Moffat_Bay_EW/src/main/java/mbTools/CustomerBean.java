@@ -50,15 +50,17 @@ public class CustomerBean  {
 	}
 
 	public String getHashedPassword() {
-		return hashedPassword;
-	}
-
+		return hashedPassword;}
 	public void setHashedPassword(String regPass) {
-		String pwQualifiers="/\\w/";//create regEx for password min 8 chars, lower, upper, number
-			
+		//Help from : https://formulashq.com/the-ultimate-guide-to-regex-for-password-validation/
+		//and regex101.com 
+		String pwQualifiers="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$";//create regEx for password min 8 chars, lower, upper, number
+		
+		System.out.println("Checking for error points");	
 		if (regPass.matches(pwQualifiers)) {
-			
-			MBEncrpt enc = new MBEncrpt();
+			System.out.println("Password passed reg Ex");
+			MBEncrypt enc = new MBEncrypt();
+			System.out.println("Encrypt object created");
 			String result= enc.hashItOut(regPass);
 			if (result.contains("There was an error. Please try again")){
 				//password not valid
@@ -78,17 +80,19 @@ public class CustomerBean  {
 	}
 
 	public void setRegPass(String regPass) {
+		System.out.println("Ran setRegPass");
 		this.regPass = regPass;
 		//auto update hashed pass
 		setHashedPassword(regPass);
+		System.out.println("ran setHashedPassword");
 	}
 
 	public int getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setAge(String age) {
+		this.age = Integer.parseInt(age);
 	}
 	
 	
