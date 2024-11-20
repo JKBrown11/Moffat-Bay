@@ -2,7 +2,6 @@ package mbTools;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
@@ -81,47 +80,23 @@ public class MBServlet extends HttpServlet {
 				System.out.println("Results of login: " + success);
 				
 				if (!success) {
-					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.html");
+					RequestDispatcher errPage = request.getRequestDispatcher("/loginError.html");
 					errPage.forward(request, response);
 					
 					System.out.println("forwarded to loginError.html");
 					break;
 				}
 				else {
-					RequestDispatcher loginSuccess = request.getRequestDispatcher("/reservation.html");
+					RequestDispatcher loginSuccess = request.getRequestDispatcher("/index.jsp");
 					loginSuccess.forward(request, response);
 					
-					System.out.println("forwarded to reservation.html");
-					break;
-				}//end else
-				
-			case "book":
-				String roomType = request.getParameter("roomType");
-				String checkIn = request.getParameter("checkInDate");
-				String checkOut = request.getParameter("checkOutDate");
-				Integer numGuests = Integer.parseInt(request.getParameter("numGuests"));
-				
-				ReservationBean resRequest = new ReservationBean();
-				resRequest.setRoomType(roomType);
-				resRequest.setCheckInDate(checkIn);
-				resRequest.setCheckOutDate(checkOut);
-				resRequest.setNumGuests(numGuests);
-				
-				MBValidator mbVali = new MBValidator();
-				boolean available = mbVali.validateStay(resRequest);
-				
-				if (available) {
-					//send to reservation confirmation
+					System.out.println("forwarded to index.jsp");
 					break;
 				}
-				else {
-					//send back to reservation page with error message
-					break;
-				}
-			}//end switch
-		}//end if
-	}//end doPost	
-}//end Class		
+			}
+		}
+		
+		
 		
 		
 		
@@ -149,6 +124,6 @@ public class MBServlet extends HttpServlet {
 //		rd.forward(request, response);
 //		System.out.println("forwarded to team.jsp");
 		
+	}//end doPOst
 
-
-
+}

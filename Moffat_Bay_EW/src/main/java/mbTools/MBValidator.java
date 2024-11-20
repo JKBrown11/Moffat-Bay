@@ -6,7 +6,7 @@ public class MBValidator {
 	
 	
 	//Validate customer fields
-	// if(firstName != null && firstName.matches("/\\w*\\s\\w*/"))// This should allow for one or two first names separated by white space.
+	// if(firstName != null && firstName.matches("/\\w*\\s*\\w*/g"))// This should allow for one or two first names separated by white space.
 	
 	
 	//Validate reservation occurrences per day, limit 2 each type
@@ -39,7 +39,7 @@ public class MBValidator {
 					System.out.println("queryRes for email not null: "+ queryRes);
 				}
 				else return false;
-				if(queryRes.equals(hashedTest)) {
+				if(queryRes == hashedTest) {
 					validPass = true;
 					System.out.println("email query returned matching pass hash");
 				}
@@ -63,13 +63,6 @@ public class MBValidator {
 		
 		return loginSuccess;
 		
-	}
-	
-public boolean validateStay(ReservationBean stayRequest){
-		
-		//create query to search database
-		//limit reservations to two per day per room type
-		return true;
 	}
 
 }

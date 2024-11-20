@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registration Page - Moffat Bay Resorts</title>
-<link rel="stylesheet" href="CSS/registrationpage.css">
+<link rel="stylesheet" href="registrationpage.css">
 </head>
 <body>
 
