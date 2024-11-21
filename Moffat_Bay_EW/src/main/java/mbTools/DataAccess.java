@@ -139,7 +139,7 @@ public class DataAccess {
 
 	public CustomerBean loadCustomer(CustomerBean loggedInUser) {
 		//get other data from sql query
-		String loadCustomerQuery = "SELECT * FROM mblodge.customer WHERE email = '" + loggedInUser.getEmail() + "'";
+		String loadCustomerQuery = "SELECT * FROM mblodge.customer_data WHERE email = '" + loggedInUser.getEmail() + "'";
 		try {
 			ResultSet userData = stmt.executeQuery(loadCustomerQuery);
 			if(userData != null) {
