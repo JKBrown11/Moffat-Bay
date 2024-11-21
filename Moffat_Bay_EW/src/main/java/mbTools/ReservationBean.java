@@ -8,6 +8,7 @@ public class ReservationBean{
 	private String checkInDate;
 	private String checkOutDate;
 	private int numGuests;
+	
 	public String getRoomType() {
 		return roomType;
 	}
