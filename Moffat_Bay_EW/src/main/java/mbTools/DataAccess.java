@@ -137,6 +137,28 @@ public class DataAccess {
 		return false;
 	}
 
+	public CustomerBean loadCustomer(CustomerBean loggedInUser) {
+		//get other data from sql query
+		String loadCustomerQuery = "SELECT * FROM mblodge.customer WHERE email = '" + loggedInUser.getEmail() + "'";
+		try {
+			ResultSet userData = stmt.executeQuery(loadCustomerQuery);
+			if(userData != null) {
+				userData.next();
+				loggedInUser.setFirstName(userData.getString(1));
+				loggedInUser.setLastName(userData.getString(2));
+				loggedInUser.setEmail(userData.getString(3));
+				loggedInUser.setAge(Integer.valueOf(userData.getInt(4)).toString());
+				loggedInUser.setPhone(userData.getString(5));
+				
+			}
+			return loggedInUser;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return loggedInUser;
+		}
+	}
+	
 	//disconnect from db
 	public void disconn() throws SQLException {
 		if (this.conn!=null)

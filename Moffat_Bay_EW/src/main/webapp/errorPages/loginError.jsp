@@ -20,8 +20,8 @@
   </div>
 
 Login Failed<br>
-Error Message: <%out.print(session.getAttribute("errorMessage")); %>
-
+Error Message: 
+${errorMessage}
 
 </body>
 </html>
