@@ -3,11 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="mbStyle.css">
+</head>
 <meta charset="UTF-8">
 <title>Reservation Summary</title>
 </head>
 <body>
-Reservation Summary page
+<h1>Reservation Summary page</h1>
 ${loggedInUser.getFirstName()}, 
 ${loggedInUser.getLastName()}<br>
 Checking in on : ${resRequest.getCheckInDate()}
