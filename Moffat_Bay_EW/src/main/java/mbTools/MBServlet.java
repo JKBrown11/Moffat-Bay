@@ -186,6 +186,30 @@ public class MBServlet extends HttpServlet {
 					break;
 				}
 				
+			case "confirm":
+				
+				//pull in the reservaton & guest info
+				userSess = request.getSession();
+				ReservationBean stayRequest = (ReservationBean) userSess.getAttribute("resRequest");
+				CustomerBean loggedInUser = (CustomerBean) userSess.getAttribute("loggedInUser");
+				//actually make reservation
+				MBValidator mbvali = new MBValidator();
+				String resultMessage = mbvali.confirmReservation(stayRequest, loggedInUser);
+				if(resultMessage.contains("error")){
+					//Alert customer reservation not made
+					//and break before success message
+					break;
+				}
+				
+				//display success message somewhere?
+				
+				
+			case "cancel":
+				
+				//redirect to reservation screen
+				RequestDispatcher errPage = request.getRequestDispatcher("reservation.html");
+				errPage.forward(request, response);
+				break;
 				}//end switch
 			}//end ifs
 		
