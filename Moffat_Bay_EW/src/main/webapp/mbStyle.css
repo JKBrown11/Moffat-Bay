@@ -1,57 +1,256 @@
-@charset "UTF-8";
-
-.header{
-	background-color: #add8e6 ;
-	min-height:50px;
-	align-content: center;
+/* General body styling */
+body {
+    background-color: #87dfe3; /* Light turquoise background */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-	background-color: #FAF9F6;
-	align-content: center;
-	width: 80%;
-}
-table{
-	
-	
-/* 	text-align:center; */
-/* 	align-content: center; */
-/* 	justify-content:center; */
-	padding-left:2%;
-	background-color: #fdfd96;
-	overflow:auto;
-	max-width: 100%;
-		
+/* Header styling */
+header {
+    background-color: #5da6a7; /* Dark turquoise */
+    color: white;
+    padding: 15px;
+    text-align: left;
 }
 
-th, td {
-	width:auto;
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
 }
 
-.logo{
-	display:block grid;
-	width: 90%;
-	min-height: 30%;
-	border: 1px solid black;
-	background-color:#fdfd96;
-	align-content: center;
-	justify-content:center;
-	margin: auto;
-	padding-bottom:2%;
-	overflow: auto;
-}
-h3{
-	align-content: center;
-	justify-content:center;
-	margin:auto;
+header a:hover {
+    text-decoration: underline;
 }
 
-a{
-	text-decoration:none;
-	border: 1px dashed gray;
-	margin-bottom: 5%;
- 	align-content: center; 
-/* 	justify-content:center; */
-/* 	margin:auto; */
+/* Navigation bar */
+nav {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    font-size: 16px;
+}
+
+/* Main content boxes */
+.card {
+    background-color: #b3e5e8; /* Light cyan background for cards */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 250px;
+    vertical-align: top;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Call-to-action button */
+.cta {
+    color: #3ba66b; /* Green color for the reservation link */
+    font-weight: bold;
+    text-decoration: underline;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.cta:hover {
+    color: #2f8a5a;
+}
+
+/* Logo */
+.logo img {
+    width: 150px;
+}
+
+/* Footer (if applicable) */
+footer {
+    background-color: #5da6a7; /* Match the header color */
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* -------------------- */
+/* Login Page Styles */
+/* -------------------- */
+
+.login-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    margin: 100px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-container input[type="submit"] {
+    background-color: #5da6a7;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #4a8687;
+}
+
+/* -------------------- */
+/* Reservation Page Styles */
+/* -------------------- */
+
+.reservation-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-form h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.reservation-form label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.reservation-form input[type="text"],
+.reservation-form input[type="email"],
+.reservation-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.reservation-form input[type="submit"] {
+    background-color: #5da6a7;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.reservation-form input[type="submit"]:hover {
+    background-color: #4a8687;
+}
+
+/* About Us Page Styles */
+.aboutus-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aboutus-container h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #847968;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+ .top-tabs a {
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.top-tabs a:hover {
+  background-color: #4CAF50;
+}
+
+.aboutus-section {
+    margin-bottom: 30px;
+}
+
+.aboutus-section h2 {
+    font-size: 28px;
+    color: #5da6a7;
+    margin-bottom: 10px;
+}
+
+.aboutus-section p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.aboutus-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+}
+
+.aboutus-section ul li {
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
