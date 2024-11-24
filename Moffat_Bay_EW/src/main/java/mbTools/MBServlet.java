@@ -203,6 +203,7 @@ public class MBServlet extends HttpServlet {
 				
 				//display success message somewhere?
 				
+				
 			case "cancel":
 				
 				//redirect to reservation screen
