@@ -29,13 +29,15 @@
 		Bed summary: ${resRequest.getRoomType()}<br>
 
 	<form action="/MoffatBay/MBServlet" method="POST" class="reservationSummary">
-		<input type="button" name="confirm-btn" value="Confirm" />
 		<input type="hidden" name="myrequest" value="confirm" />
+		<input type="submit" name="confirm-btn" value="Confirm" />
 	</form>
+	
 	<form action="/MoffatBay/MBServlet" method="POST" class="reservationSummary">
-		<input type="button" name="cancel-btn" value="Cancel" />
 		<input type="hidden" name="myrequest" value="cancel" />
+		<input type="submit" name="cancel-btn" value="Cancel" />
 	</form>
+	<!-- changed input type to submit instead of button -->
 	</div> 
 	</div>
 

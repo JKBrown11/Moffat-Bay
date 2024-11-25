@@ -129,7 +129,7 @@ public class MBValidator {
 	}
 	
 	public String confirmReservation(ReservationBean stayRequest, CustomerBean customer) {
-		
+		System.out.println("running confrimReservation");
 		//reservation was available
 		//login requirement enforced in servlet
 		

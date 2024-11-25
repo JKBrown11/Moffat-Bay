@@ -16,6 +16,7 @@ public class CustomerBean  {
 	private String regPass;
 	//private String query;
 	
+
 	
 	public CustomerBean() {
 		super();
@@ -23,10 +24,10 @@ public class CustomerBean  {
 		
 	//Getters and setters for all bean props. 
 	
-	
+	//zero sanitizing. 
 	public String getFirstName() {return firstName;	}
 	public void setFirstName(String firstName) {
-		if (firstName != null ) 
+		if (firstName != null & firstName.matches(firstName) ) 
 			this.firstName = firstName;
 	}
 	
@@ -94,7 +95,9 @@ public class CustomerBean  {
 	public void setAge(String age) {
 		this.age = Integer.parseInt(age);
 	}
-	
+	public void setAge(int age) {
+		this.age = age;
+	}
 	
 	
 	
