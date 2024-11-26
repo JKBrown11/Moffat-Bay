@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/reservationpage.css">
@@ -40,6 +41,7 @@
 	<!-- changed input type to submit instead of button -->
 	</div> 
 	</div>
+
 
 <!--  Both the reservation and customer objects should be available by el here
 and be pretty much loaded. I didn't import passwords from the customer though. Only email.  -->

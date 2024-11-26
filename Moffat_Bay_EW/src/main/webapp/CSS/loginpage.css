@@ -61,6 +61,11 @@ body {
   margin-bottom: 100px;
 }
 
+.login-container h1 {
+    font-size: 22px;
+    color: #000000
+}
+
 .login-container h2 {
   color: #64b5c1;
   margin-bottom: 20px;
