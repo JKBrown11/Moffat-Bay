@@ -11,7 +11,7 @@
 <body>
 
 <div class="welcome-message">
-  Welcome to Moffat Bay Resorts
+<h2>Welcome to Moffat Bay Resorts</h2>
 </div>
 
 <div class="top-tabs">
