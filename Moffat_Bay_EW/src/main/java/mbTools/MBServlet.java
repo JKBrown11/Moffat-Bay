@@ -32,6 +32,7 @@ public class MBServlet extends HttpServlet {
 	 * Method to handle post requests.
 	 * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//Utilize hidden inputs to denote post request source		
 		String from = request.getParameter("myrequest");
 		//System.out.println("The value of hidden input 'myrequest' is " + from);
@@ -39,49 +40,166 @@ public class MBServlet extends HttpServlet {
 		
 		//If there is a request value received:
 		if (from != null) {
+			
 			switch (from){
-			//and it is register
+			
+			//and the request value is register
+/* REGISTER*/
 			case "register":
+				System.out.println("servlet case acknowledged as register");
 				//the customer beans do  not have input sani as of 11/14/24 1:44 CST
 				//pull the data from the form, using an object.
 				CustomerBean registerNew = new CustomerBean();
-				registerNew.setFirstName(request.getParameter("firstName"));
-				registerNew.setLastName(request.getParameter("lastName"));				
-				registerNew.setEmail(request.getParameter("email"));
-				registerNew.setPhone(request.getParameter("phone"));
-				registerNew.setAge(request.getParameter("age"));
-				String regPass = request.getParameter("regPass");
-				registerNew.setRegPass(regPass);
-				//System.out.println("Form values received. ");
-				////testing point
-				try {
-					//This uses the DataAccess class to load the driver, and connect.
-					DataAccess daoBean = new DataAccess();
-					daoBean.addBeans(registerNew); //This inserts a new customer to db. 
+				System.out.println("empty customer created");
+				
+				
+				//Adding input sani 11/25 1:42pm
+				//Store values to inspect before using
+				String rawFirstName = request.getParameter("firstName");
+				String rawLastName = request.getParameter("lastName");
+				String rawEmail = request.getParameter("email");
+				String rawPhone = request.getParameter("phone");
+				int intAge = Integer.parseInt(request.getParameter("age"));
+				String rawRegPass = request.getParameter("regPass");
+				System.out.println("values retreived from form");
+				
+				boolean firstNameFlag = false;
+				boolean lastNameFlag = false;
+				boolean email = false;
+				boolean phone= false;
+				boolean age = false; 
+				boolean regPass = false;
+				String nameErr, emailErr, phoneErr, ageErr, regPassErr = "";
+				System.out.println("flags set to false for initial, errors blank until a failure");
+				
+				String alphaOnly = "/[a-zA-Z']*/"; //abc only
+				String tenDigitPhone = "/[0-9]{10}/";
+				String dashedPhone = "/ (?:[0-9]{3}-[0-9]{3}-[0-9]{4})/";
+				String emailSyntax = "/(\\w*)@(\\w*)\\.\\w{3}/";
+				//regEx for password min 8chars, lower case,  upper case, and number
+				String pwQualifiers="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$";
+				
+				//Validate name fields only contain alpha word characters. 
+/*first name*/	if (rawFirstName.matches(alphaOnly)) {
+					System.out.println("raw input matched regex for first name");
+					registerNew.setFirstName(rawFirstName);
+					firstNameFlag = true;
+					System.out.println("first name true");
 				}
-				catch (ClassNotFoundException e) {
-					e.printStackTrace();}
-				catch (SQLException e) {
-					e.printStackTrace();}
+				else {
+					nameErr= "First and last names should only contain characters that occur in words";
+					HttpSession session = request.getSession();
+					session.setAttribute("nameErr", nameErr);
+				}
 				
-				System.out.println("customer added to db");
+/*last name*/	if (rawLastName.matches(alphaOnly)) {
+					System.out.println("raw input matched regex for last name");
+					registerNew.setLastName(rawLastName);
+					lastNameFlag = true;
+					System.out.println("last name true");
+				}
+				else {
+					nameErr= "First and last names should only contain characters that occur in words";
+					HttpSession session = request.getSession();
+					session.setAttribute("nameErr", nameErr);
+				}
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/login.html");
-				rd.forward(request, response);
 				
-				System.out.println("forwarded to login.html");
-				break;
-			
-				//and it is login
-			case "login":
+				//Validate email resembles traditional format
+/*email*/		if (rawEmail.matches(emailSyntax)) {
+					System.out.println("raw input matched regex for email");
+					registerNew.setEmail(rawEmail);
+					email = true;
+					System.out.println("email true");
+				}			
+				else {
+					emailErr = "Your email should follow a traditional word@word.com/edu/gov pattern";
+					HttpSession session = request.getSession();
+					session.setAttribute("emailErr", emailErr);
+				}
+				
+				//Check if phone looks normal containing only numbers and dashes
+/*phone*/		if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
+					registerNew.setPhone(rawPhone);
+					phone = true;
+					System.out.println("phone true");
+				}
+				else {
+					phoneErr= "Your phone number should be entered in the patter of XXX-XXX-XXXX";
+					HttpSession session = request.getSession();
+					session.setAttribute("phoneErr", phoneErr);
+				}
+				
+				//Only allow accounts for 18 or older, excepting irrationally large ages. 
+/*age*/			if ( intAge >= 18 && intAge <= 105) {
+					registerNew.setAge(intAge);
+					age = true;	
+					System.out.println("age true");
+				}
+				else {
+					ageErr = "We are unable to process an account due to your age.";
+					HttpSession session = request.getSession();
+					session.setAttribute("ageErr", ageErr);
+				}
+				
+				//Verify password meets standard before conversion to show err. 
+/*regPass*/		if (rawRegPass.matches(pwQualifiers)) {
+					registerNew.setRegPass(rawRegPass);
+					regPass = true;
+					System.out.println("regPass true");
+				}
+				else {
+					regPassErr = "Your password must contain at least one upper case, one lower case, and one number character in addition to being 8 or more characters.";
+					HttpSession session = request.getSession();
+					session.setAttribute("regPassErr", regPassErr);
+				}
+				
+				//Data sanitized. Check our flags. 
+				//if all good, make an account. 
+/*All true*/	if (firstNameFlag == true && lastNameFlag == true && email == true && phone == true && age == true && regPass == true) {
+					System.out.println("All flaggs true");
+					//System.out.println("Form values received. ");
+					////testing point
+					try {
+						//This uses the DataAccess class to load the driver, and connect.
+						DataAccess daoBean = new DataAccess();
+						daoBean.addBeans(registerNew); //This inserts a new customer to db. 
+					}
+					catch (ClassNotFoundException e) {
+						e.printStackTrace();}
+					catch (SQLException e) {
+						e.printStackTrace();}
+					
+					System.out.println("customer added to db");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/login.html");
+					rd.forward(request, response);
+					
+					System.out.println("forwarded to login.html");
+					break;
+				}
+				//Else, return to registration with error messages now appearing. 
+				else {
+					System.out.println("At least one value failed");
+					RequestDispatcher rd = request.getRequestDispatcher("/registration.jsp");
+					rd.forward(request, response);
+					
+					System.out.println("forwarded to registration for error messages.html");
+					break;
+				}
+				
+				
+				//and the request message is login
+/*LOGIN*/	case "login":
+	
 				// get values from form
-				String email = request.getParameter("email");
+				String userEmail = request.getParameter("email");
 				String unhashed= request.getParameter("regPass");
 				System.out.println("The value of unhashed is: " + unhashed);
 				
 				//Check to see if they work
 				MBValidator vali = new MBValidator();
-				boolean success = vali.validateLogin(email, unhashed);
+				boolean success = vali.validateLogin(userEmail, unhashed);
 				System.out.println("Results of login: " + success);
 				
 				//if login didn't work
@@ -99,7 +217,7 @@ public class MBServlet extends HttpServlet {
 				}
 				else {//login successful, add user to session as bean
 					CustomerBean loggedInUser = new CustomerBean();
-					loggedInUser.setEmail(email); 
+					loggedInUser.setEmail(userEmail); 
 					
 					
 					try {
@@ -120,7 +238,7 @@ public class MBServlet extends HttpServlet {
 					break;
 				}//end else
 				
-			case "book":
+/*BOOK*/	case "book":
 				//System.out.println("Case acknowledged book request");
 				HttpSession userSess = request.getSession();
 				
@@ -186,9 +304,9 @@ public class MBServlet extends HttpServlet {
 					break;
 				}
 				
-			case "confirm":
-				
-				//pull in the reservaton & guest info
+/*CONFIRM*/	case "confirm":
+				System.out.println("summary confirmed running");
+				//pull in the reservation & guest info
 				userSess = request.getSession();
 				ReservationBean stayRequest = (ReservationBean) userSess.getAttribute("resRequest");
 				CustomerBean loggedInUser = (CustomerBean) userSess.getAttribute("loggedInUser");
@@ -206,14 +324,14 @@ public class MBServlet extends HttpServlet {
 				sendConfirm.forward(request, response);
 				break;
 				
-			case "cancel":
+/*CANCEL*/	case "cancel":
 				
 				//redirect to reservation screen
 				RequestDispatcher errPage = request.getRequestDispatcher("reservation.html");
 				errPage.forward(request, response);
 				break;
-				}//end switch
-			}//end ifs
+			}//end switch
+		}//end ifs
 		
 			
 		

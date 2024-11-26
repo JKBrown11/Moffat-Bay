@@ -7,6 +7,13 @@ body {
   background-attachment: fixed;
 }
 
+.banner{
+	margin-top: 0;
+	width: 100%;
+	aspect-ratio: 5/1;	
+	justify-content:center;
+}
+
 .logo {
   position: absolute;
   top: 10px;

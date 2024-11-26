@@ -67,6 +67,9 @@ public class DataAccess {
 		System.out.println("Bean added");
 	}
 	
+	/*This method is used in validating login attempts
+	 * @param String sqlQuery the select statement created from user
+	 * input email */
 	public String queryEmailpw(String sqlQuery) {
 		System.out.println("running makeQuery from DAO");
 		ResultSet sqlOutput;
@@ -88,8 +91,10 @@ public class DataAccess {
 		}
 		return "error";
 	}
-	////////--------------------------------------------------
 	
+	/*
+	 * This function makes update commands to the db
+	 * given @param String sqlQuery from servlet or validator class */
 	public String makeUpdate(String sqlQuery) {
 		Integer status;
 		try {
@@ -104,6 +109,9 @@ public class DataAccess {
 		return status.toString();
 	}
 
+	/*This function counts the number of reservations 
+	 * beginning on the check in date for the 
+	 * users requested bed size to prevent overbooking */
 	public int makeQueryCount(String sqlQuery) {
 		ResultSet countResult;
 		int count = -1;
@@ -123,6 +131,8 @@ public class DataAccess {
 		
 	}
 
+	/*This function inserts a new reservation to the  database 
+	 * given an sql query from servlet or validator */
 	public boolean makeReservationUpdate(String sqlQuery) {
 		
 		Integer status;
@@ -137,6 +147,7 @@ public class DataAccess {
 		return false;
 	}
 
+	/*This function loads a customer into the session after a successful login */
 	public CustomerBean loadCustomer(CustomerBean loggedInUser) {
 		//get other data from sql query
 		String loadCustomerQuery = "SELECT * FROM mblodge.customer_data WHERE email = '" + loggedInUser.getEmail() + "'";
@@ -158,6 +169,39 @@ public class DataAccess {
 			return loggedInUser;
 		}
 	}
+	
+	/*Function to search by reservation number */
+	public ReservationBean searchReservationNumber(int resNum) {
+		
+		ReservationBean searchedStay = new ReservationBean();
+		if (!(resNum > 0)) {
+			return searchedStay;//this is an empty Bean? I can't return null
+		}
+		String queryResNum = "SELECT * FROM mblodge.reservations WHERE reservation_number = " + resNum;
+		
+		try {
+			ResultSet queryResults = stmt.executeQuery(queryResNum);
+			if (queryResults != null) {
+				queryResults.next();
+				searchedStay.setResNumber(queryResults.getInt(1));
+				searchedStay.setResOwnerEmail(queryResults.getString(2));
+				searchedStay.setCheckInDate(queryResults.getString(3));
+				searchedStay.setCheckOutDate(queryResults.getString(4));
+				searchedStay.setRoomType(queryResults.getString(5));
+				searchedStay.setNumGuests(queryResults.getInt(6));
+				return searchedStay;
+			}
+			else return searchedStay;// empty attributes
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return searchedStay; //this would likely also be empty if stmt threw an error
+		}
+	}
+	
+	/*Function to search by customer email */
+	//perhaps return an array of reservations for email search
+	
 	
 	//disconnect from db
 	public void disconn() throws SQLException {

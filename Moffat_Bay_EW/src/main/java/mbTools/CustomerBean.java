@@ -16,6 +16,7 @@ public class CustomerBean  {
 	private String regPass;
 	//private String query;
 	
+
 	
 	public CustomerBean() {
 		super();
@@ -23,34 +24,48 @@ public class CustomerBean  {
 		
 	//Getters and setters for all bean props. 
 	
+	// As of 11/25 on reservationSummary branch, sanitizing occurs in servlet.
 	
-	public String getFirstName() {return firstName;	}
+	/*						*/
+	/*      firstName      */
+	/*						*/
+	public String getFirstName() {return this.firstName; }
 	public void setFirstName(String firstName) {
 		if (firstName != null ) 
 			this.firstName = firstName;
 	}
 	
-	public String getLastName() {return lastName;}
+	/*						*/
+	/*      lastName      */
+	/*						*/
+	public String getLastName() {return lastName; }
 	public void setLastName(String lastName) {
 		if (lastName!=null)
 			this.lastName = lastName;
 	}
 	
-	
-	public String getPhone() {return phone;}
+	/*					*/
+	/*      Phone      */
+	/*					*/
+	public String getPhone() {return this.phone; }
 	public void setPhone(String phone) {
 		if (phone != null)
 			this.phone = phone;
 	}
-	
-	public String getEmail() {return email;	}
+
+	/*				*/
+	/*     Email      */
+	/*				*/
+	public String getEmail() {return this.email; }
 	public void setEmail(String email) {
 		if (email != null)
 			this.email = email;
 	}
 
-	public String getHashedPassword() {
-		return hashedPassword;}
+	/*						*/
+	/*      hashedPass      */
+	/*						*/
+	public String getHashedPassword() {return this.hashedPassword;}
 	public void setHashedPassword(String regPass) {
 		//Help from : https://formulashq.com/the-ultimate-guide-to-regex-for-password-validation/
 		//and regex101.com 
@@ -75,10 +90,10 @@ public class CustomerBean  {
 		
 	}
 
-	public String getRegPass() {
-		return regPass;
-	}
-
+	/*					*/
+	/*      RegPass      */
+	/*					*/
+	public String getRegPass() {return this.regPass; }
 	public void setRegPass(String regPass) {
 		System.out.println("Ran setRegPass");
 		this.regPass = regPass;
@@ -87,14 +102,16 @@ public class CustomerBean  {
 		System.out.println("ran setHashedPassword");
 	}
 
-	public int getAge() {
-		return age;
-	}
-
+	/*				*/
+	/*      Age      */
+	/*				*/
+	public int getAge() {return age;}
 	public void setAge(String age) {
 		this.age = Integer.parseInt(age);
 	}
-	
+	public void setAge(int age) {
+		this.age = age;
+	}
 	
 	
 	
