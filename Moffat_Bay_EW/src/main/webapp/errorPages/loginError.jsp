@@ -6,7 +6,7 @@
 <head>
 <title>Error</title>
 <h2>Something went wrong. Reservation not accepted. </h2>
-<link rel="stylesheet" href="CSS/Moffat2.css">
+<link rel="stylesheet" href="CSS/loginpage.css">
 </head>
 
 <body>

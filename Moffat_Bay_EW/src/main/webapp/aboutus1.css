@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(101, 233, 240, 0.8);
+}
+
+header {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+
+/*  Porting in top-tabs code to match rest of site*/
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #847968;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+ .top-tabs a {
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.top-tabs a:hover {
+  background-color: #4CAF50;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #847968;
+    padding: 10px 0;
+}
+
+.navbar a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #5c5648;
+}
+
+section {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.story-section h3, 
+.experience-section h3 {
+    font-size: 1.5em;
+    color: #847968;
+    text-align: center;
+}
+
+section p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.story-grid p {
+    font-size: 1em;
+    color: #555;
+}
+
+.image, .experience-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.experience-image {
+    max-width: 50%;
+}
+
+.cta-button {
+    display: inline-block;
+    margin: 20px auto;
+    font-size: 16px;
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    text-decoration: underline;
+}

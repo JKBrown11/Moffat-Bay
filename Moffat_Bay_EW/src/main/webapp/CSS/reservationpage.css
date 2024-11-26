@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: rgba(101, 233, 240, 0.8);
+  background: #65e9f0;
 }
 
 .background-image {
@@ -39,7 +39,7 @@ body {
   margin-top: 10px;
 }
 
-.top-tabs a {
+ .top-tabs a {
   padding: 10px 20px;
   color: white;
   text-align: center;

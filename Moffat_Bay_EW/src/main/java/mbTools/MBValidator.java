@@ -83,6 +83,7 @@ public class MBValidator {
 	}
 	
 	/* 
+	 * Validate reservation availability
 	 * @param ReservationBean stayRequest - the requested bed and days from the user
 	 * @param CustomerBean customer - the user logged in to the session 
 	 * */
@@ -103,21 +104,10 @@ public class MBValidator {
 		if (count >= 2) {
 			//There are no more rooms that day
 			System.out.println("Reservation rejected for room availability");
+			valiDAO.disconn();
 			return false; //validateStay is false
 		}
 		else {
-			//reservation is available
-			//login requirement enforced in servlet
-			
-			//pull user email to link to proper customer account
-			String newReservationQuery = "INSERT into mblodge.reservations(email, check_in_date, check_out_date,"
-					+ "bed_size, party_size) VALUES ('" + customer.getEmail() + "', '" 
-					+ stayRequest.getCheckInDate() + "', '" + stayRequest.getCheckOutDate() + "', '" 
-					+ stayRequest.getRoomType() + "', '" + stayRequest.getNumGuests() + "')";
-			System.out.println("The insert query is: " + newReservationQuery);
-			
-			//call update function with valiDAO
-			valiDAO.makeReservationUpdate(newReservationQuery);
 			valiDAO.disconn();
 			return true;
 			
@@ -136,6 +126,31 @@ public class MBValidator {
 	
 	
 	return false;
+	}
+	
+	public String confirmReservation(ReservationBean stayRequest, CustomerBean customer) {
+		
+		//reservation was available
+		//login requirement enforced in servlet
+		
+		//pull user email to link to proper customer account
+		String newReservationQuery = "INSERT into mblodge.reservations(email, check_in_date, check_out_date,"
+				+ "bed_size, party_size) VALUES ('" + customer.getEmail() + "', '" 
+				+ stayRequest.getCheckInDate() + "', '" + stayRequest.getCheckOutDate() + "', '" 
+				+ stayRequest.getRoomType() + "', '" + stayRequest.getNumGuests() + "')";
+		System.out.println("The insert query is: " + newReservationQuery);
+		
+		//call update function with valiDAO
+		try {
+			DataAccess valiDAO = new DataAccess();
+			valiDAO.makeReservationUpdate(newReservationQuery);
+			return "success";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		
 	}
 
 }
