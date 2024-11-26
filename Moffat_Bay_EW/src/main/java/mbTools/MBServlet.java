@@ -202,7 +202,9 @@ public class MBServlet extends HttpServlet {
 				}
 				
 				//display success message somewhere?
-				
+				RequestDispatcher sendConfirm = request.getRequestDispatcher("successPage.html");
+				sendConfirm.forward(request, response);
+				break;
 				
 			case "cancel":
 				
