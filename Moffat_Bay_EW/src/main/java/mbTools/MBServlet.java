@@ -46,28 +46,33 @@ public class MBServlet extends HttpServlet {
 			//and the request value is register
 /* REGISTER*/
 			case "register":
-				
+				System.out.println("servlet case acknowledged as register");
 				//the customer beans do  not have input sani as of 11/14/24 1:44 CST
 				//pull the data from the form, using an object.
 				CustomerBean registerNew = new CustomerBean();
+				System.out.println("empty customer created");
+				
 				
 				//Adding input sani 11/25 1:42pm
+				//Store values to inspect before using
 				String rawFirstName = request.getParameter("firstName");
 				String rawLastName = request.getParameter("lastName");
 				String rawEmail = request.getParameter("email");
 				String rawPhone = request.getParameter("phone");
 				int intAge = Integer.parseInt(request.getParameter("age"));
 				String rawRegPass = request.getParameter("regPass");
+				System.out.println("values retreived from form");
 				
 				boolean firstNameFlag = false;
-				boolean lastName = false;
+				boolean lastNameFlag = false;
 				boolean email = false;
 				boolean phone= false;
 				boolean age = false; 
 				boolean regPass = false;
-				String nameErr, emailErr, phoneErr, ageErr, regPassErr = null;
+				String nameErr, emailErr, phoneErr, ageErr, regPassErr = "";
+				System.out.println("flags set to false for initial, errors blank until a failure");
 				
-				String alphaOnly = "/[a-zA-Z]*/"; //abc only
+				String alphaOnly = "/[a-zA-Z']*/"; //abc only
 				String tenDigitPhone = "/[0-9]{10}/";
 				String dashedPhone = "/ (?:[0-9]{3}-[0-9]{3}-[0-9]{4})/";
 				String emailSyntax = "/(\\w*)@(\\w*)\\.\\w{3}/";
@@ -75,9 +80,11 @@ public class MBServlet extends HttpServlet {
 				String pwQualifiers="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$";
 				
 				//Validate name fields only contain alpha word characters. 
-				if (rawFirstName.matches(alphaOnly)) {
+/*first name*/	if (rawFirstName.matches(alphaOnly)) {
+					System.out.println("raw input matched regex for first name");
 					registerNew.setFirstName(rawFirstName);
 					firstNameFlag = true;
+					System.out.println("first name true");
 				}
 				else {
 					nameErr= "First and last names should only contain characters that occur in words";
@@ -85,9 +92,11 @@ public class MBServlet extends HttpServlet {
 					session.setAttribute("nameErr", nameErr);
 				}
 				
-				if (rawLastName.matches(alphaOnly)) {
+/*last name*/	if (rawLastName.matches(alphaOnly)) {
+					System.out.println("raw input matched regex for last name");
 					registerNew.setLastName(rawLastName);
-					lastName = true;
+					lastNameFlag = true;
+					System.out.println("last name true");
 				}
 				else {
 					nameErr= "First and last names should only contain characters that occur in words";
@@ -97,9 +106,11 @@ public class MBServlet extends HttpServlet {
 				
 				
 				//Validate email resembles traditional format
-				if (rawEmail.matches(emailSyntax)) {
+/*email*/		if (rawEmail.matches(emailSyntax)) {
+					System.out.println("raw input matched regex for email");
 					registerNew.setEmail(rawEmail);
 					email = true;
+					System.out.println("email true");
 				}			
 				else {
 					emailErr = "Your email should follow a traditional word@word.com/edu/gov pattern";
@@ -108,9 +119,10 @@ public class MBServlet extends HttpServlet {
 				}
 				
 				//Check if phone looks normal containing only numbers and dashes
-				if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
+/*phone*/		if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
 					registerNew.setPhone(rawPhone);
 					phone = true;
+					System.out.println("phone true");
 				}
 				else {
 					phoneErr= "Your phone number should be entered in the patter of XXX-XXX-XXXX";
@@ -119,9 +131,10 @@ public class MBServlet extends HttpServlet {
 				}
 				
 				//Only allow accounts for 18 or older, excepting irrationally large ages. 
-				if ( intAge >= 18 && intAge <= 105) {
+/*age*/			if ( intAge >= 18 && intAge <= 105) {
 					registerNew.setAge(intAge);
 					age = true;	
+					System.out.println("age true");
 				}
 				else {
 					ageErr = "We are unable to process an account due to your age.";
@@ -130,9 +143,10 @@ public class MBServlet extends HttpServlet {
 				}
 				
 				//Verify password meets standard before conversion to show err. 
-				if (rawRegPass.matches(pwQualifiers)) {
+/*regPass*/		if (rawRegPass.matches(pwQualifiers)) {
 					registerNew.setRegPass(rawRegPass);
 					regPass = true;
+					System.out.println("regPass true");
 				}
 				else {
 					regPassErr = "Your password must contain at least one upper case, one lower case, and one number character in addition to being 8 or more characters.";
@@ -142,8 +156,8 @@ public class MBServlet extends HttpServlet {
 				
 				//Data sanitized. Check our flags. 
 				//if all good, make an account. 
-				if (firstNameFlag && lastName && email && phone && age && regPass) {
-				
+/*All true*/	if (firstNameFlag == true && lastNameFlag == true && email == true && phone == true && age == true && regPass == true) {
+					System.out.println("All flaggs true");
 					//System.out.println("Form values received. ");
 					////testing point
 					try {
@@ -166,14 +180,12 @@ public class MBServlet extends HttpServlet {
 				}
 				//Else, return to registration with error messages now appearing. 
 				else {
+					System.out.println("At least one value failed");
 					RequestDispatcher rd = request.getRequestDispatcher("/registration.jsp");
 					rd.forward(request, response);
 					
 					System.out.println("forwarded to registration for error messages.html");
 					break;
-					
-					
-					
 				}
 				
 				
