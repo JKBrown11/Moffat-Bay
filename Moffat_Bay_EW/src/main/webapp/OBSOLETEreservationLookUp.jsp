@@ -9,6 +9,14 @@
 
 </head>
 <body>
+<div class="top-tabs">
+    <a href="/MoffatBay/MoffatHome.html">Home</a>
+    <a href="/MoffatBay/reservation.html">Book Now!</a>
+    <a href="#tab3">Activities</a>
+    <a href="#tab4">Contact Us</a>
+    <a href="aboutus_jg.html">About Us</a>
+    <a href="/MoffatBay/login.html">Login</a>  
+</div>
 
 <div class="login-container">
 	<form class = "searchForm" action = "/MoffatBay/MBServlet" method = "POST">
