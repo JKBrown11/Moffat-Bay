@@ -1,9 +1,10 @@
 package mbTools;
 
-import java.sql.Date;
+
 
 public class ReservationBean{
 	
+	private String resOwnerEmail;
 	private String roomType;
 	private String checkInDate;
 	private String checkOutDate;
@@ -39,6 +40,12 @@ public class ReservationBean{
 	}
 	public void setResNumber(int resNum) {
 		this.resNumber= resNum;
+	}
+	public String getResOwnerEmail() {
+		return resOwnerEmail;
+	}
+	public void setResOwnerEmail(String resOwnerEmail) {
+		this.resOwnerEmail = resOwnerEmail;
 	}
 	
 	
