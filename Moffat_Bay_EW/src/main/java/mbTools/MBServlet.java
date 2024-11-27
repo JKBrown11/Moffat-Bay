@@ -345,6 +345,24 @@ public class MBServlet extends HttpServlet {
 				RequestDispatcher errPage = request.getRequestDispatcher("reservation.html");
 				errPage.forward(request, response);
 				break;
+				
+				
+			case "searchByResNum":
+				HttpSession searchSess = request.getSession();
+				CustomerBean searchUser = (CustomerBean) searchSess.getAttribute("loggedInUser");
+				if (searchUser==null) {
+					//redirect to errorpage
+					String errorMessage = "You must be logged in to search for your reservation.";
+					searchSess.setAttribute("errorMessage", errorMessage);
+					RequestDispatcher noSearch = request.getRequestDispatcher("errorPages/loginError.jsp");
+					noSearch.forward(request, response);
+					break;
+				}
+				else {
+					//search for reservation with loggedin email and res number
+				}
+				
+	
 			}//end switch
 		}//end ifs
 

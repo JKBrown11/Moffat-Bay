@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +16,7 @@
         <a href="/MoffatBay/MoffatHome.html">Home</a>
 	    <a href="/MoffatBay/reservation.html">Book Now!</a>
 	    <a href="#tab3">Activities</a>
-	    <a href="#tab4">Contact Us</a>
+	    <a href="/MoffatBay/ContactUs.html">Contact Us</a>
 	    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
 	    <a href="/MoffatBay/login.html">Login</a> 
     </nav>

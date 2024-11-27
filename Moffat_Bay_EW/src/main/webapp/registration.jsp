@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <div class="welcome-message">
 <h2>Welcome to Moffat Bay Resorts</h2>
 </div>
