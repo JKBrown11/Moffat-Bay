@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>Error</title>
-<h2>Something went wrong. Reservation not accepted. </h2>
+<h2>Something went wrong. See error message below. </h2>
 <link rel="stylesheet" href="CSS/loginpage.css">
 </head>
 
@@ -19,9 +19,11 @@
     <a href="/MoffatBay/login.html">Login</a>   
   </div>
 
-Login Failed<br>
-Error Message: 
-${errorMessage}
+<div class="container" >
+	<br>
+	<h3>Error Message:</h3> 
+	${errorMessage}
+</div>
 
 </body>
 </html>

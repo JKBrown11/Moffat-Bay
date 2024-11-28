@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <div class="welcome-message">
 <h2>Welcome to Moffat Bay Resorts</h2>
 </div>
@@ -19,7 +20,7 @@
     <a href="/MoffatBay/reservation.html">Book Now!</a>
     <a href="#tab3">Activities</a>
     <a href="#tab4">Contact Us</a>
-    <a href="aboutus_jg.html">About Us</a>
+    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
     <a href="/MoffatBay/login.html">Login</a>  
 </div>
 
