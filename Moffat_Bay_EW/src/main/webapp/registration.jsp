@@ -17,9 +17,10 @@
 
 <div class="top-tabs">
     <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.html">Book Now!</a>
+    <a href="/MoffatBay/reservation.jsp">Book A Trip!</a>
+    <a href="/MoffatBay/lookup.jsp">Look Up</a>
     <a href="#tab3">Activities</a>
-    <a href="#tab4">Contact Us</a>
+    <a href="/MoffatBay/contactus.html">Contact Us</a>
     <a href="/MoffatBay/aboutus_jg.html">About Us</a>
     <a href="/MoffatBay/login.html">Login</a>  
 </div>

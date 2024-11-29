@@ -171,20 +171,23 @@ public class DataAccess {
 	}
 	
 	/*Function to search by reservation number */
-	public ReservationBean searchReservationNumber(int resNum) {
+	public ReservationBean searchReservationNumber(int resNum, CustomerBean loggedInUser) {
 		
 		ReservationBean searchedStay = new ReservationBean();
-		if (!(resNum > 0)) {
+		if (resNum < 0) {
 			return searchedStay;//this is an empty Bean? I can't return null
 		}
-		String queryResNum = "SELECT * FROM mblodge.reservations WHERE reservation_number = " + resNum;
+		String queryResNum = "SELECT * FROM mblodge.reservations WHERE reservation_number = " + resNum
+				+ " AND email = '" + loggedInUser.getEmail() + "'";
 		
 		try {
 			ResultSet queryResults = stmt.executeQuery(queryResNum);
 			if (queryResults != null) {
 				queryResults.next();
 				searchedStay.setResNumber(queryResults.getInt(1));
+				System.out.println("PUlled res number");
 				searchedStay.setResOwnerEmail(queryResults.getString(2));
+				System.out.println("setResOwnerEmail run");
 				searchedStay.setCheckInDate(queryResults.getString(3));
 				searchedStay.setCheckOutDate(queryResults.getString(4));
 				searchedStay.setRoomType(queryResults.getString(5));
@@ -199,8 +202,35 @@ public class DataAccess {
 		}
 	}
 	
+	
 	/*Function to search by customer email */
 	//perhaps return an array of reservations for email search
+	public ArrayList<ReservationBean> searchUserEmail(CustomerBean loggedInUser) {
+		String rezByEmail = "SELECT * FROM mblodge.reservations WHERE email = '" 
+				+ loggedInUser.getEmail() + "'";
+		ArrayList<ReservationBean> allUserRez = new ArrayList<ReservationBean>();
+		ReservationBean tempBean = new ReservationBean();
+		try {
+			ResultSet dbPull = stmt.executeQuery(rezByEmail);
+			if (dbPull != null) {
+				
+				while(dbPull.next()) {
+					tempBean.setResNumber(dbPull.getInt(1));
+					tempBean.setResOwnerEmail(dbPull.getString(2));
+					tempBean.setCheckInDate(dbPull.getString(3));
+					tempBean.setCheckOutDate(dbPull.getString(4));
+					tempBean.setRoomType(dbPull.getString(5));
+					tempBean.setNumGuests(dbPull.getInt(6));
+					allUserRez.add(tempBean);
+					System.out.println("added a bean to search diplay");
+					
+				}//end while
+				return allUserRez;
+			}//end if
+			else return null;
+		}//end try
+		catch(Exception e) {e.printStackTrace(); return null;}
+	}
 	
 	
 	//disconnect from db

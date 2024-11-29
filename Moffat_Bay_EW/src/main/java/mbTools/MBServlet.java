@@ -2,6 +2,7 @@ package mbTools;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,12 +39,9 @@ public class MBServlet extends HttpServlet {
 
 		//Utilize hidden inputs to denote post request source
 		String from = request.getParameter("myrequest");
-		//System.out.println("The value of hidden input 'myrequest' is " + from);
-		//testing point
 
 		//If there is a request value received:
 		if (from != null) {
-
 			switch (from){
 
 			//and the request value is register
@@ -54,7 +52,6 @@ public class MBServlet extends HttpServlet {
 				//pull the data from the form, using an object.
 				CustomerBean registerNew = new CustomerBean();
 				System.out.println("empty customer created");
-
 
 				//Adding input sani 11/25 1:42pm
 				//Store values to inspect before using
@@ -318,6 +315,7 @@ public class MBServlet extends HttpServlet {
 					errPage.forward(request, response);
 					break;
 				}
+				
 
 /*CONFIRM*/	case "confirm":
 				System.out.println("summary confirmed running");
@@ -347,22 +345,93 @@ public class MBServlet extends HttpServlet {
 				break;
 				
 				
-			case "searchByResNum":
-				HttpSession searchSess = request.getSession();
+/*SRCH*/	case "searchByResNum":
+/*byRes#*/		HttpSession searchSess = request.getSession();
+				RequestDispatcher rd;
+				String errorMessage = "";
 				CustomerBean searchUser = (CustomerBean) searchSess.getAttribute("loggedInUser");
 				if (searchUser==null) {
 					//redirect to errorpage
-					String errorMessage = "You must be logged in to search for your reservation.";
+					errorMessage = "You must be logged in to search for your reservation.";
 					searchSess.setAttribute("errorMessage", errorMessage);
-					RequestDispatcher noSearch = request.getRequestDispatcher("errorPages/loginError.jsp");
-					noSearch.forward(request, response);
+					rd = request.getRequestDispatcher("lookup.jsp");
+					rd.forward(request, response);
 					break;
 				}
 				else {
-					//search for reservation with loggedin email and res number
+					//search for reservation with loggedin user and res number
+					// with DAO  
+					int resNum = Integer.parseInt(request.getParameter("searchNumber"));
+					if (resNum <= 0) {
+						errorMessage = "You must enter a valid reservation number.";
+						searchSess.setAttribute("errorMessage", errorMessage);
+						rd = request.getRequestDispatcher("lookup.jsp");
+						rd.forward(request, response);
+						break;
+					}
+					try {
+						DataAccess searchDAO = new DataAccess();
+						ReservationBean searchResult = searchDAO.searchReservationNumber(resNum, searchUser);
+						//String testEmail = searchResult.getResOwnerEmail();
+						if (searchUser.getEmail().equals(searchResult.getResOwnerEmail())) {//If emails match
+							searchSess.setAttribute("searchResult", searchResult);//Make the results available
+							
+							rd = request.getRequestDispatcher("lookup.jsp");
+							rd.forward(request, response);
+							break;
+						}
+						else {
+							errorMessage = "The email you logged in with doesn't match this reservation.";
+							searchSess.setAttribute("errorMessage", errorMessage);
+							rd = request.getRequestDispatcher("lookup.jsp");
+							rd.forward(request, response);
+							break;
+						}
+						
+					}catch (Exception e) {
+						e.printStackTrace();
+						errorMessage = "That search had faulty results.";
+						searchSess.setAttribute("errorMessage", errorMessage);
+						rd = request.getRequestDispatcher("lookup.jsp");
+						rd.forward(request, response);
+						break;
+					}
+				}//end else
+				
+/*SRCH*/	case "searchByEmail":
+/*by email*/	HttpSession selfSrch = request.getSession();
+				RequestDispatcher srchrd;
+				String errorM = "";
+				CustomerBean searcher = (CustomerBean) selfSrch.getAttribute("loggedInUser");
+				if(searcher==null) {
+					errorM = "You must be logged in to search for a reservation.";
+					selfSrch.setAttribute("errorMessage", errorM);
+					srchrd = request.getRequestDispatcher("lookup.jsp");
+					srchrd.forward(request, response);
+					break;
+				}
+				else if ((searcher.getEmail()).equals(request.getParameter("email")) ) {
+					//ok to search
+					try {
+						DataAccess emailSrchDAO = new DataAccess();
+						ArrayList<ReservationBean> userRezs = emailSrchDAO.searchUserEmail(searcher);
+						selfSrch.setAttribute("userRezs", userRezs);
+						srchrd=request.getRequestDispatcher("lookup.jsp");
+						srchrd.forward(request, response);
+					}
+					catch(Exception e) {e.printStackTrace(); break;}
+				}
+				else {
+					errorM = "You can only look at your own reservations";
+					selfSrch.setAttribute("errorMessage", errorM);
+					srchrd = request.getRequestDispatcher("lookup.jsp");
+					srchrd.forward(request, response);
+					break;
 				}
 				
-	
+				//search by email
+				//display all user reservations. 
+				
 			}//end switch
 		}//end ifs
 

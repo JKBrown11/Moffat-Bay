@@ -6,12 +6,12 @@
 	version="2.1">
 	<description>Example of a simple tag library</description>
 	<tlib-version>1.0</tlib-version>
-	<short-name>customTag</short-name>
+	<short-name>displayReservation</short-name>
 	<tag>
-		<description>Displays all current staff</description>
-		<display-name>displayStaff</display-name>
-		<name>displayStaff</name>
-		<tag-class>MBTools.CustomTagBean</tag-class>
+		<description>Displays all matching reservations</description>
+		<display-name>displayReservation</display-name>
+		<name>displayReservation</name>
+		<tag-class>mbTools.DisplayReservation</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	</taglib>
