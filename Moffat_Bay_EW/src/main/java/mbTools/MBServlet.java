@@ -39,7 +39,7 @@ public class MBServlet extends HttpServlet {
 
 		//Utilize hidden inputs to denote post request source
 		String from = request.getParameter("myrequest");
-
+		String errorMessage = "";
 		//If there is a request value received:
 		if (from != null) {
 			switch (from){
@@ -218,7 +218,7 @@ public class MBServlet extends HttpServlet {
 				if (!success) {
 					//Login failed
 					//set session error message to retrieve on error page
-					String errorMessage = "Your login was not successful due to incorrect email or password.";
+					errorMessage = "Your login was not successful due to incorrect email or password.";
 					HttpSession session = request.getSession();
 					session.setAttribute("errorMessage", errorMessage);
 					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
@@ -264,7 +264,7 @@ public class MBServlet extends HttpServlet {
 				catch (NullPointerException e) {
 					e.printStackTrace();
 					//error, send to login
-					String errorMessage = "You must be logged in to book a trip.";
+					errorMessage = "You must be logged in to book a trip.";
 					userSess.setAttribute("errorMessage", errorMessage);
 					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
 					errPage.forward(request, response);
@@ -302,14 +302,14 @@ public class MBServlet extends HttpServlet {
 					}
 					else {
 						//send back to reservation page with error message
-						String errorMessage = "The bed you selected is not available for the beginning of your stay.";
+						errorMessage = "The bed you selected is not available for the beginning of your stay.";
 						userSess.setAttribute("errorMessage", errorMessage);
 						RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
 						errPage.forward(request, response);
 						break;
 					}}
 				else {
-					String errorMessage = "You must be logged in to make a reservation.";
+					errorMessage = "You must be logged in to make a reservation.";
 					userSess.setAttribute("errorMessage", errorMessage);
 					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
 					errPage.forward(request, response);
@@ -318,7 +318,7 @@ public class MBServlet extends HttpServlet {
 				
 
 /*CONFIRM*/	case "confirm":
-				System.out.println("summary confirmed running");
+				System.out.println("summary confirmed ");
 				//pull in the reservation & guest info
 				userSess = request.getSession();
 				ReservationBean stayRequest = (ReservationBean) userSess.getAttribute("resRequest");
@@ -331,9 +331,14 @@ public class MBServlet extends HttpServlet {
 					//and break before success message
 					break;
 				}
-
+				
+				String successMsg= "<div class=\"alert\">"
+						+ "  <span class=\"closeAlert\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"
+						+ "  Success!"
+						+ "</div>";
+				userSess.setAttribute("successMsg", successMsg);
 				//display success message somewhere?
-				RequestDispatcher sendConfirm = request.getRequestDispatcher("successPage.html");
+				RequestDispatcher sendConfirm = request.getRequestDispatcher("reservationSummary.jsp");
 				sendConfirm.forward(request, response);
 				break;
 
@@ -348,7 +353,7 @@ public class MBServlet extends HttpServlet {
 /*SRCH*/	case "searchByResNum":
 /*byRes#*/		HttpSession searchSess = request.getSession();
 				RequestDispatcher rd;
-				String errorMessage = "";
+				errorMessage = "";
 				CustomerBean searchUser = (CustomerBean) searchSess.getAttribute("loggedInUser");
 				if (searchUser==null) {
 					//redirect to errorpage
@@ -375,7 +380,7 @@ public class MBServlet extends HttpServlet {
 						//String testEmail = searchResult.getResOwnerEmail();
 						if (searchUser.getEmail().equals(searchResult.getResOwnerEmail())) {//If emails match
 							searchSess.setAttribute("searchResult", searchResult);//Make the results available
-							
+							searchSess.setAttribute("insertTagWhenReady", "<ctag:displayReservation></ctag:displayReservation>");
 							rd = request.getRequestDispatcher("lookup.jsp");
 							rd.forward(request, response);
 							break;
@@ -403,6 +408,7 @@ public class MBServlet extends HttpServlet {
 				RequestDispatcher srchrd;
 				String errorM = "";
 				CustomerBean searcher = (CustomerBean) selfSrch.getAttribute("loggedInUser");
+				String enteredEmail = request.getParameter("searchEmail");
 				if(searcher==null) {
 					errorM = "You must be logged in to search for a reservation.";
 					selfSrch.setAttribute("errorMessage", errorM);
@@ -410,12 +416,16 @@ public class MBServlet extends HttpServlet {
 					srchrd.forward(request, response);
 					break;
 				}
-				else if ((searcher.getEmail()).equals(request.getParameter("email")) ) {
-					//ok to search
+				else if (enteredEmail.equals(searcher.getEmail())) {
+					//ok to search					System.out.println("search matches login");
 					try {
 						DataAccess emailSrchDAO = new DataAccess();
 						ArrayList<ReservationBean> userRezs = emailSrchDAO.searchUserEmail(searcher);
+						System.out.println("all bean results added, back to servlet");
 						selfSrch.setAttribute("userRezs", userRezs);
+						System.out.println("bean list set in session");
+						selfSrch.setAttribute("display", "<ctag:displayReservation></ctag:displayReservation>");
+						System.out.println("display attribute set in session.");
 						srchrd=request.getRequestDispatcher("lookup.jsp");
 						srchrd.forward(request, response);
 					}

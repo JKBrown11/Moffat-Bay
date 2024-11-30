@@ -191,6 +191,7 @@ public class DataAccess {
 				searchedStay.setCheckInDate(queryResults.getString(3));
 				searchedStay.setCheckOutDate(queryResults.getString(4));
 				searchedStay.setRoomType(queryResults.getString(5));
+				System.out.println("results of roomtype" + searchedStay.getRoomType());
 				searchedStay.setNumGuests(queryResults.getInt(6));
 				return searchedStay;
 			}
@@ -208,12 +209,12 @@ public class DataAccess {
 	public ArrayList<ReservationBean> searchUserEmail(CustomerBean loggedInUser) {
 		String rezByEmail = "SELECT * FROM mblodge.reservations WHERE email = '" 
 				+ loggedInUser.getEmail() + "'";
+		System.out.println("Logged in email as: " + loggedInUser.getEmail());
 		ArrayList<ReservationBean> allUserRez = new ArrayList<ReservationBean>();
 		ReservationBean tempBean = new ReservationBean();
 		try {
 			ResultSet dbPull = stmt.executeQuery(rezByEmail);
 			if (dbPull != null) {
-				
 				while(dbPull.next()) {
 					tempBean.setResNumber(dbPull.getInt(1));
 					tempBean.setResOwnerEmail(dbPull.getString(2));
@@ -229,7 +230,9 @@ public class DataAccess {
 			}//end if
 			else return null;
 		}//end try
-		catch(Exception e) {e.printStackTrace(); return null;}
+		catch(Exception e) {
+			e.printStackTrace(); 
+			return null;}
 	}
 	
 	
