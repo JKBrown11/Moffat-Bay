@@ -200,6 +200,7 @@ public class MBServlet extends HttpServlet {
 					break;
 				}
 
+//---------------------------------------------------------------
 
 				//and the request message is login
 /*LOGIN*/	case "login":
@@ -250,6 +251,8 @@ public class MBServlet extends HttpServlet {
 					break;
 				}//end else
 
+//-------------------------------------------------------------------------				
+				
 /*BOOK*/	case "book":
 				//System.out.println("Case acknowledged book request");
 				HttpSession userSess = request.getSession();
@@ -315,7 +318,8 @@ public class MBServlet extends HttpServlet {
 					errPage.forward(request, response);
 					break;
 				}
-				
+
+//--------------------------------------------------------------------------				
 
 /*CONFIRM*/	case "confirm":
 				System.out.println("summary confirmed ");
@@ -342,6 +346,8 @@ public class MBServlet extends HttpServlet {
 				sendConfirm.forward(request, response);
 				break;
 
+//------------------------------------------------------------------				
+				
 /*CANCEL*/	case "cancel":
 
 				//redirect to reservation screen
@@ -349,6 +355,7 @@ public class MBServlet extends HttpServlet {
 				errPage.forward(request, response);
 				break;
 				
+//-------------------------------------------------------------------
 				
 /*SRCH*/	case "searchByResNum":
 /*byRes#*/		HttpSession searchSess = request.getSession();
@@ -403,6 +410,8 @@ public class MBServlet extends HttpServlet {
 					}
 				}//end else
 				
+//------------------------------------------------------------------------				
+				
 /*SRCH*/	case "searchByEmail":
 /*by email*/	HttpSession selfSrch = request.getSession();
 				RequestDispatcher srchrd;
@@ -424,7 +433,7 @@ public class MBServlet extends HttpServlet {
 						System.out.println("all bean results added, back to servlet");
 						selfSrch.setAttribute("userRezs", userRezs);
 						System.out.println("bean list set in session");
-						selfSrch.setAttribute("display", "<ctag:displayReservation></ctag:displayReservation>");
+						//selfSrch.setAttribute("display", "<ctag:displayReservation></ctag:displayReservation>");
 						System.out.println("display attribute set in session.");
 						srchrd=request.getRequestDispatcher("lookup.jsp");
 						srchrd.forward(request, response);

@@ -47,33 +47,34 @@ public class DisplayReservation extends SimpleTagSupport {
 		else {
 			JspWriter out = getJspContext().getOut();
 			out.write("Nothing to display.");
-			
-			
 		}
-        JspWriter out = getJspContext().getOut();
-        out.write("<table class=\"displayRes\">"
-        		+ "<tr>"
-        		+ "	<td style=\"width:20%\" >Guest Name</td>"
-        		+ "	<td style=\"width:25%\" >Contact</td>"
-        		+ "	<td style=\"width:10%\" >Res. Num.</td>"
-        		+ "	<td style=\"width:20%\">Check-In</td>"
-        		+ "	<td style=\"width:20%\">Check-Out</td>"
-        		+ "	<td style=\"width:5%\">Num. Guests</td>"
-        		+ "	</tr>");
-		for(ReservationBean res: this.displayObjects) {
-			
-			out.write("<tr>"
-					+ "<td>" + loggedIn.getFirstName() + ", " + loggedIn.getLastName() + "</td>"
-					+ "<td>" + res.getResOwnerEmail()+ "</td>"
-					+ "<td>" + res.getResNumber() + "</td>"
-					+ "<td>" + res.getCheckInDate() + "</td>"
-					+ "<td>" + res.getCheckOutDate()+ "</td>"
-					+ "<td>" + res.getNumGuests() + "</td>"
-					+ "</tr>");
-		}//end for
-		
-		out.write("</table");
-		
+        if(this.displayObjects != null) {
+	        
+		        JspWriter out = getJspContext().getOut();
+		        out.write("<table class=\"displayRes\">"
+		        		+ "<tr>"
+		        		+ "	<td style=\"width:20%\" >Guest Name</td>"
+		        		+ "	<td style=\"width:25%\" >Contact</td>"
+		        		+ "	<td style=\"width:10%\" >Res. Num.</td>"
+		        		+ "	<td style=\"width:20%\">Check-In</td>"
+		        		+ "	<td style=\"width:20%\">Check-Out</td>"
+		        		+ "	<td style=\"width:5%\">Num. Guests</td>"
+		        		+ "	</tr>");
+		        
+				for(ReservationBean res: this.displayObjects) {
+					out.write("<tr>"
+							+ "<td>" + loggedIn.getFirstName() + ", " + loggedIn.getLastName() + "</td>"
+							+ "<td>" + res.getResOwnerEmail()+ "</td>"
+							+ "<td>" + res.getResNumber() + "</td>"
+							+ "<td>" + res.getCheckInDate() + "</td>"
+							+ "<td>" + res.getCheckOutDate()+ "</td>"
+							+ "<td>" + res.getNumGuests() + "</td>"
+							+ "</tr>");
+				}//end for
+				
+				out.write("</table");
+	        
+        }   
 	}//end doTag
 		
 		

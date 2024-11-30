@@ -40,7 +40,7 @@
 		<input type="submit" name="cancel-btn" value="Cancel" />
 	</form>
 	${successMsg};
-	<!-- changed input type to submit instead of button -->
+	
 	</div> 
 	</div>
 

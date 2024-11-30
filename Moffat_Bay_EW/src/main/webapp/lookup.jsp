@@ -46,7 +46,7 @@ pageEncoding="UTF-8" %>
         </div>
     </div>
     <div class = "container">
-    	${display}
+    	<ctag:displayReservation></ctag:displayReservation>
     	<div class = "errorMessages">
 			<h3>${errorMessage}</h3>
 		</div>
