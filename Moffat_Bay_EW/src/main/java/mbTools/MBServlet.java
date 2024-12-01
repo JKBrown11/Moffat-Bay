@@ -434,7 +434,7 @@ public class MBServlet extends HttpServlet {
 						selfSrch.setAttribute("userRezs", userRezs);
 						System.out.println("bean list set in session");
 						//selfSrch.setAttribute("display", "<ctag:displayReservation></ctag:displayReservation>");
-						System.out.println("display attribute set in session.");
+						//System.out.println("display attribute set in session.");
 						srchrd=request.getRequestDispatcher("lookup.jsp");
 						srchrd.forward(request, response);
 					}

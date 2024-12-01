@@ -211,11 +211,12 @@ public class DataAccess {
 				+ loggedInUser.getEmail() + "'";
 		System.out.println("Logged in email as: " + loggedInUser.getEmail());
 		ArrayList<ReservationBean> allUserRez = new ArrayList<ReservationBean>();
-		ReservationBean tempBean = new ReservationBean();
+		
 		try {
 			ResultSet dbPull = stmt.executeQuery(rezByEmail);
 			if (dbPull != null) {
 				while(dbPull.next()) {
+					ReservationBean tempBean = new ReservationBean();
 					tempBean.setResNumber(dbPull.getInt(1));
 					tempBean.setResOwnerEmail(dbPull.getString(2));
 					tempBean.setCheckInDate(dbPull.getString(3));
@@ -224,7 +225,7 @@ public class DataAccess {
 					tempBean.setNumGuests(dbPull.getInt(6));
 					allUserRez.add(tempBean);
 					System.out.println("added a bean to search diplay");
-					
+					dbPull.next();
 				}//end while
 				return allUserRez;
 			}//end if
