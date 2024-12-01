@@ -20,17 +20,22 @@ public class DisplayReservation extends SimpleTagSupport {
 	public void setDisplayObjects(ArrayList<ReservationBean> rezList) {
 		this.displayObjects= rezList;
 	}
+	public ArrayList<ReservationBean> getDisplayObjects(){
+		return this.displayObjects;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void doTag() throws IOException {
 		
 		//Connect to the 'site' and access session attribute we set for our list
-		
+		System.out.println("custom tag called");
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpSession session = request.getSession();
 		
         this.loggedIn= (CustomerBean) session.getAttribute("loggedInUser");
+        setDisplayObjects(null);
+        
         
         if (session.getAttribute("userRezs")!=null) {
            	setDisplayObjects((ArrayList<ReservationBean>) session.getAttribute("userRezs"));
@@ -41,23 +46,35 @@ public class DisplayReservation extends SimpleTagSupport {
         }
 		else {
 			JspWriter out = getJspContext().getOut();
-			out.write("Something went wrong!");
-			
+			out.write("Nothing to display.");
 		}
-        JspWriter out = getJspContext().getOut();	
-		for(ReservationBean res: displayObjects) {
-			
-			out.write("<tr>"
-					+ "<td>" + loggedIn.getFirstName() + ", " + loggedIn.getLastName() + "</td>"
-					+ "<td>" + res.getResOwnerEmail()+ "</td>"
-					+ "<td>" + res.getResNumber() + "</td>"
-					+ "<td>" + res.getCheckInDate() + "</td>"
-					+ "<td>" + res.getCheckOutDate()+ "</td>"
-					+ "<td>" + res.getNumGuests() + "</td>"
-					+ "</tr>");
-		}//end for
-			
-		
+        if(this.displayObjects != null) {
+	        
+		        JspWriter out = getJspContext().getOut();
+		        out.write("<table class=\"displayRes\">"
+		        		+ "<tr>"
+		        		+ "	<td style=\"width:20%\" >Guest Name</td>"
+		        		+ "	<td style=\"width:25%\" >Contact</td>"
+		        		+ "	<td style=\"width:10%\" >Res. Num.</td>"
+		        		+ "	<td style=\"width:20%\">Check-In</td>"
+		        		+ "	<td style=\"width:20%\">Check-Out</td>"
+		        		+ "	<td style=\"width:5%\">Num. Guests</td>"
+		        		+ "	</tr>");
+		        
+				for(ReservationBean res: this.displayObjects) {
+					out.write("<tr>"
+							+ "<td>" + loggedIn.getFirstName() + ", " + loggedIn.getLastName() + "</td>"
+							+ "<td>" + res.getResOwnerEmail()+ "</td>"
+							+ "<td>" + res.getResNumber() + "</td>"
+							+ "<td>" + res.getCheckInDate() + "</td>"
+							+ "<td>" + res.getCheckOutDate()+ "</td>"
+							+ "<td>" + res.getNumGuests() + "</td>"
+							+ "</tr>");
+				}//end for
+				
+				out.write("</table");
+	        
+        }   
 	}//end doTag
 		
 		

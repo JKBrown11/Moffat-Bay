@@ -191,6 +191,7 @@ public class DataAccess {
 				searchedStay.setCheckInDate(queryResults.getString(3));
 				searchedStay.setCheckOutDate(queryResults.getString(4));
 				searchedStay.setRoomType(queryResults.getString(5));
+				System.out.println("results of roomtype" + searchedStay.getRoomType());
 				searchedStay.setNumGuests(queryResults.getInt(6));
 				return searchedStay;
 			}
@@ -208,13 +209,14 @@ public class DataAccess {
 	public ArrayList<ReservationBean> searchUserEmail(CustomerBean loggedInUser) {
 		String rezByEmail = "SELECT * FROM mblodge.reservations WHERE email = '" 
 				+ loggedInUser.getEmail() + "'";
+		System.out.println("Logged in email as: " + loggedInUser.getEmail());
 		ArrayList<ReservationBean> allUserRez = new ArrayList<ReservationBean>();
-		ReservationBean tempBean = new ReservationBean();
+		
 		try {
 			ResultSet dbPull = stmt.executeQuery(rezByEmail);
 			if (dbPull != null) {
-				
 				while(dbPull.next()) {
+					ReservationBean tempBean = new ReservationBean();
 					tempBean.setResNumber(dbPull.getInt(1));
 					tempBean.setResOwnerEmail(dbPull.getString(2));
 					tempBean.setCheckInDate(dbPull.getString(3));
@@ -223,13 +225,15 @@ public class DataAccess {
 					tempBean.setNumGuests(dbPull.getInt(6));
 					allUserRez.add(tempBean);
 					System.out.println("added a bean to search diplay");
-					
+					dbPull.next();
 				}//end while
 				return allUserRez;
 			}//end if
 			else return null;
 		}//end try
-		catch(Exception e) {e.printStackTrace(); return null;}
+		catch(Exception e) {
+			e.printStackTrace(); 
+			return null;}
 	}
 	
 	
