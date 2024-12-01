@@ -34,7 +34,7 @@ public class DisplayReservation extends SimpleTagSupport {
         HttpSession session = request.getSession();
 		
         this.loggedIn= (CustomerBean) session.getAttribute("loggedInUser");
-        setDisplayObjects(null);
+        //setDisplayObjects(null);
         
         
         if (session.getAttribute("userRezs")!=null) {
