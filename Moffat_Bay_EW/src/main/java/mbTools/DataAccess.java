@@ -225,7 +225,7 @@ public class DataAccess {
 					tempBean.setNumGuests(dbPull.getInt(6));
 					allUserRez.add(tempBean);
 					System.out.println("added a bean to search diplay");
-					dbPull.next();
+					//dbPull.next();
 				}//end while
 				return allUserRez;
 			}//end if
