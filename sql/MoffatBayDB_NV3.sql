@@ -56,8 +56,10 @@ resNum int,
 subj VARCHAR(50) NOT NULL,
 message mediumtext NOT NULL,
 submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-messageNumber int AUTO_INCREMENT NOT NULL PRIMARY KEY
+messageNumber int auto_increment PRIMARY KEY
 );
+ALTER TABLE mblodge.customer_messages AUTO_INCREMENT=7600;
+
 
 
 
