@@ -48,14 +48,17 @@ VALUES
  
  
  -- Table to hold info from contact us
- CREATE TABLE customer_messages (
+ CREATE TABLE mblodge.customer_messages (
 fullName VARCHAR(30) NOT NULL, 
-email VARCHAR(45) UNIQUE NOT NULL PRIMARY KEY,
+email VARCHAR(45) NOT NULL,
 phone VARCHAR(12),
 resNum int,
 subj VARCHAR(50) NOT NULL,
 message mediumtext NOT NULL,
-submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+messageNumber int AUTO_INCREMENT NOT NULL PRIMARY KEY
 );
+
+
 
 
