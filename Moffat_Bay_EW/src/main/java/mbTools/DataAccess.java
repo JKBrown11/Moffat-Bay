@@ -237,6 +237,19 @@ public class DataAccess {
 	}
 	
 	
+	/*
+	 * Function to submit a message from servlet
+	 * 
+	 * */
+	public void addMessage(MessageBean message) {
+		String insertUpdate= "INSERT INTO mblodge.customer_messages "
+				+" (fullname, CTemail, CTphone, CTresNum, CTsubj, CTmessage) VALUES "
+				+ "('" + message.getFilteredFullName() + "','" + message.getFilteredEmail() + "','" 
+				+ message.getFilteredPhone() + "'," + message.getFilteredResNum()+ ",'" 
+				+ message.getFilteredSubj() + "','" + message.getFilteredMess() + "')";
+	}
+	
+	
 	//disconnect from db
 	public void disconn() throws SQLException {
 		if (this.conn!=null)

@@ -448,8 +448,39 @@ public class MBServlet extends HttpServlet {
 					break;
 				}
 				
-				//search by email
-				//display all user reservations. 
+//-------------------------------------------------------------------------
+			case "contactUs":
+				HttpSession contactSess = request.getSession();
+				//ALL UNFILTERED
+				//Consider moving register logic to validator as intended to
+				// reuse here
+				String rawName = request.getParameter("name");
+				String rawConEmail= request.getParameter("email");
+				String rawConPhone = request.getParameter("phone");
+				String rawResNum = request.getParameter("reservation");
+				String rawSubj = request.getParameter("subject");
+				String rawMess = request.getParameter("message");
+				
+				//Create message class/object-check
+				//Create message table in db & Moffat- check 
+				//filter filter- not check, need to migrate top section
+				
+				//set a new object to give to DAO for easy inputs
+				MessageBean newMess = new MessageBean();
+				newMess.setFilteredFullName(rawName);
+				newMess.setFilteredEmail(rawConEmail);
+				newMess.setFilteredPhone(rawConPhone);
+				newMess.setFilteredResNum(rawResNum);
+				newMess.setFilteredSubj(rawSubj);
+				newMess.setFilteredMess(rawMess);
+				
+				try {
+					DataAccess messageDAO = new DataAccess();
+					messageDAO.addMessage(newMess);
+				}
+				
+				
+				break;
 				
 			}//end switch
 		}//end ifs
