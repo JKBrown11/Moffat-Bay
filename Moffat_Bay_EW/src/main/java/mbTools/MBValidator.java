@@ -6,14 +6,20 @@ import javax.servlet.http.HttpSession;
 
 public class MBValidator {
 	
+	private String messageReg = "(?:\\w*\\s*)*(?:[\\'\\.\\!\\?\\,\\;]*)";
+	private String subjectReg = "[\\w ]*";
+	private String fullNameReg = "(?:\\w* \\w*)";
+	private String alphaOnly = "[a-zA-Z']+"; //abc only, verified on regEx101
+	private String tenDigitPhone = "[0-9]{10}";
+	private String dashedPhone = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})"; //verified on regEx101 to accept 123-234-5678 format string
+	private String emailSyntax = "(\\w*)@(\\w*)\\.(\\w{3})";
+	//regEx for password min 8chars, lower case,  upper case, and number
+	private String pwQualifiers="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$";
+	
 	public MBValidator() {
 		System.out.println("Validator Object Created");
+		
 	}
-	//Validate customer fields
-	// if(firstName != null && firstName.matches("/\\w*\\s\\w*/"))// This should allow for one or two first names separated by white space.
-	
-	
-	//Validate reservation occurrences per day, limit 2 each type
 	
 	/* Validate login attempt 
 	 * @param tryEmail - email entered from user on login page
@@ -151,6 +157,79 @@ public class MBValidator {
 			return "error";
 		}
 		
+	}
+	
+	
+	/*
+	 * Want to handle all input sani in validator to clean up. 
+	 * All currently functioning for register so should be a transfer 
+	 * and spread. 
+	 */
+	
+	//Validate name fields only contain alpha word characters.
+	public boolean checkFirstName (String rawFirstName) {
+		if (rawFirstName.matches(alphaOnly)) {
+			System.out.println("raw input matched regex for first name");
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkLastName(String rawLastName) {
+		if(rawLastName.matches(alphaOnly)) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkFullName(String rawFullName) {
+		if (rawFullName.matches(fullNameReg)) {
+			System.out.println("raw input matched regex for full name");
+			return true;
+		}
+		else return false;
+	}
+	
+	//Validate email resembles traditional format
+	public boolean checkEmailInput(String rawEmail) {
+		//Validate email resembles traditional format
+		/*email*/		
+		if (rawEmail.matches(emailSyntax)) {
+			System.out.println("raw input matched regex for email");
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkPhoneInput(String rawPhone) {
+		System.out.println("checkPhone run");
+		if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkRegPass(String rawRegPass) {
+		if (rawRegPass.matches(pwQualifiers)) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkSubj(String rawSubj) {
+		if (rawSubj.matches(subjectReg)) {
+			System.out.println("subject passed");
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkMessage(String rawMessage) {
+		if (rawMessage.matches(messageReg)) {
+			System.out.println("messsage passed");
+			return true;
+		}
+		else return false;
 	}
 
 }//end class

@@ -185,7 +185,7 @@ public class DataAccess {
 			if (queryResults != null) {
 				queryResults.next();
 				searchedStay.setResNumber(queryResults.getInt(1));
-				System.out.println("PUlled res number");
+				System.out.println("Pulled res number");
 				searchedStay.setResOwnerEmail(queryResults.getString(2));
 				System.out.println("setResOwnerEmail run");
 				searchedStay.setCheckInDate(queryResults.getString(3));
@@ -225,7 +225,7 @@ public class DataAccess {
 					tempBean.setNumGuests(dbPull.getInt(6));
 					allUserRez.add(tempBean);
 					System.out.println("added a bean to search diplay");
-					dbPull.next();
+					//dbPull.next();
 				}//end while
 				return allUserRez;
 			}//end if
@@ -234,6 +234,22 @@ public class DataAccess {
 		catch(Exception e) {
 			e.printStackTrace(); 
 			return null;}
+	}
+	
+	
+	/*
+	 * Function to submit a message from servlet
+	 * 
+	 * */
+	public String addMessage(MessageBean message) {
+		String insertUpdate= "INSERT INTO mblodge.customer_messages "
+				+" (fullname, email, phone, resNum, subj, message) VALUES "
+				+ "('" + message.getFilteredFullName() + "','" + message.getFilteredEmail() + "','" 
+				+ message.getFilteredPhone() + "'," + message.getFilteredResNum()+ ",'" 
+				+ message.getFilteredSubj() + "','" + message.getFilteredMess() + "')";
+		
+		String resultMessage = makeUpdate(insertUpdate);
+		return resultMessage;
 	}
 	
 	

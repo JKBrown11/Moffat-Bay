@@ -37,9 +37,16 @@ public class MBServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//Setting up some reusable objects for servlet processing 
+		String errorMessage = "";
+		String successMsg = "";
+		HttpSession session = request.getSession();
+		RequestDispatcher rd;
+		MBValidator validator = new MBValidator();
+		
+		
 		//Utilize hidden inputs to denote post request source
 		String from = request.getParameter("myrequest");
-		String errorMessage = "";
 		//If there is a request value received:
 		if (from != null) {
 			switch (from){
@@ -47,16 +54,14 @@ public class MBServlet extends HttpServlet {
 			//and the request value is register
 /* REGISTER*/
 			case "register":
-				System.out.println("servlet case acknowledged as register");
-				//the customer beans do  not have input sani as of 11/14/24 1:44 CST
+				
 				//pull the data from the form, using an object.
 				CustomerBean registerNew = new CustomerBean();
 				System.out.println("empty customer created");
-
-				//Adding input sani 11/25 1:42pm
+				//MBValidator validated = new MBValidator();
+				
 				//Store values to inspect before using
 				String rawFirstName = request.getParameter("firstName");
-				System.out.println("rawFirstName pulled as: " + rawFirstName);
 				String rawLastName = request.getParameter("lastName");
 				String rawEmail = request.getParameter("email");
 				String rawPhone = request.getParameter("phone");
@@ -75,67 +80,51 @@ public class MBServlet extends HttpServlet {
 				String phoneErr= "";
 				String ageErr = "";
 				String regPassErr = "";
-				System.out.println("flags set to false for initial, errors blank until a failure");
+				
+				//Input sani moved to Validator class as of 12/2
+/*first name*/	
 
-				String alphaOnly = "[a-zA-Z']+"; //abc only, verified on regEx101
-				String tenDigitPhone = "[0-9]{10}";
-				String dashedPhone = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})"; //verified on regEx101 to accept 123-234-5678 format string
-				String emailSyntax = "(\\w*)@(\\w*)\\.(\\w{3})";
-				//regEx for password min 8chars, lower case,  upper case, and number
-				String pwQualifiers="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$";
-
-				//Validate name fields only contain alpha word characters.
-/*first name*/	if (rawFirstName.matches(alphaOnly)) {
-					System.out.println("raw input matched regex for first name");
+				firstNameFlag = validator.checkFirstName(rawFirstName);
+				if (firstNameFlag) {
 					registerNew.setFirstName(rawFirstName);
-					firstNameFlag = true;
-					System.out.println("first name true");
 				}
 				else {
 					nameErr= "First and last names should only contain characters that occur in words";
-					HttpSession session = request.getSession();
 					session.setAttribute("nameErr", nameErr);
 				}
+				
 
-/*last name*/	if (rawLastName.matches(alphaOnly)) {
-					System.out.println("raw input matched regex for last name");
+/*last name*/	lastNameFlag = validator.checkLastName(rawLastName);
+				if (lastNameFlag) {
 					registerNew.setLastName(rawLastName);
-					lastNameFlag = true;
-					System.out.println("last name true");
 				}
 				else {
 					nameErr= "First and last names should only contain characters that occur in words";
-					HttpSession session = request.getSession();
 					session.setAttribute("nameErr", nameErr);
 				}
 
 
-				//Validate email resembles traditional format
-/*email*/		if (rawEmail.matches(emailSyntax)) {
-					System.out.println("raw input matched regex for email");
+/*email*/		email = validator.checkEmailInput(rawEmail);
+				if (email) {
 					registerNew.setEmail(rawEmail);
-					email = true;
-					System.out.println("email true");
 				}
 				else {
 					emailErr = "Your email should follow a traditional word@word.com/edu/gov pattern";
-					HttpSession session = request.getSession();
 					session.setAttribute("emailErr", emailErr);
 				}
 
 				//Check if phone looks normal containing only numbers and dashes
-/*phone*/		if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
+/*phone*/		phone = validator.checkPhoneInput(rawPhone);
+				if (phone) {
 					registerNew.setPhone(rawPhone);
-					phone = true;
-					System.out.println("phone true");
 				}
 				else {
 					phoneErr= "Your phone number should be entered in the patter of XXX-XXX-XXXX";
-					HttpSession session = request.getSession();
 					session.setAttribute("phoneErr", phoneErr);
 				}
 
 				//Only allow accounts for 18 or older, excepting irrationally large ages.
+				// Only used once, so no function created. 
 /*age*/			if ( intAge >= 18 && intAge <= 105) {
 					registerNew.setAge(intAge);
 					age = true;
@@ -143,19 +132,16 @@ public class MBServlet extends HttpServlet {
 				}
 				else {
 					ageErr = "We are unable to process an account due to your age.";
-					HttpSession session = request.getSession();
 					session.setAttribute("ageErr", ageErr);
 				}
 
 				//Verify password meets standard before conversion to show err.
-/*regPass*/		if (rawRegPass.matches(pwQualifiers)) {
+/*regPass*/		regPass = validator.checkRegPass(rawRegPass);
+				if (regPass) {
 					registerNew.setRegPass(rawRegPass);
-					regPass = true;
-					System.out.println("regPass true");
 				}
 				else {
 					regPassErr = "Your password must contain at least one upper case, one lower case, and one number character in addition to being 8 or more characters.";
-					HttpSession session = request.getSession();
 					session.setAttribute("regPassErr", regPassErr);
 				}
 
@@ -177,26 +163,17 @@ public class MBServlet extends HttpServlet {
 
 					System.out.println("customer added to db");
 
-					RequestDispatcher rd = request.getRequestDispatcher("/login.html");
+					rd = request.getRequestDispatcher("/login.html");
 					rd.forward(request, response);
 
-					System.out.println("forwarded to login.html");
 					break;
 				}
 				//Else, return to registration with error messages now appearing.
 				else {
-					System.out.println("At least one value failed");
-					System.out.println("Value of Flags: ");//email age phone regpass
-					System.out.println("firstNameFlag " + firstNameFlag);
-					System.out.println("lastNameFlag " + lastNameFlag);
-					System.out.println("email flag " + email);
-					System.out.println("phone flag " + phone);
-					System.out.println("age flag " + age);
-					System.out.println("regPass flag " + regPass);
-					RequestDispatcher rd = request.getRequestDispatcher("/registration.jsp");
+					
+					rd = request.getRequestDispatcher("/registration.jsp");
 					rd.forward(request, response);
 
-					System.out.println("forwarded to registration for error messages.html");
 					break;
 				}
 
@@ -211,8 +188,8 @@ public class MBServlet extends HttpServlet {
 				System.out.println("The value of unhashed is: " + unhashed);
 
 				//Check to see if they work
-				MBValidator vali = new MBValidator();
-				boolean success = vali.validateLogin(userEmail, unhashed);
+				//MBValidator vali = new MBValidator();
+				boolean success = validator.validateLogin(userEmail, unhashed);
 				System.out.println("Results of login: " + success);
 
 				//if login didn't work
@@ -220,12 +197,10 @@ public class MBServlet extends HttpServlet {
 					//Login failed
 					//set session error message to retrieve on error page
 					errorMessage = "Your login was not successful due to incorrect email or password.";
-					HttpSession session = request.getSession();
 					session.setAttribute("errorMessage", errorMessage);
-					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
-					errPage.forward(request, response);
+					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd.forward(request, response);
 
-					//System.out.println("forwarded to loginError.jsp");
 					break;
 				}
 				else {//login successful, add user to session as bean
@@ -241,11 +216,10 @@ public class MBServlet extends HttpServlet {
 						e.printStackTrace();}
 
 					//set attribute as customer bean for reservation summary
-					HttpSession userSess = request.getSession();
-					userSess.setAttribute("loggedInUser", loggedInUser);
+					session.setAttribute("loggedInUser", loggedInUser);
 
-					RequestDispatcher loginSuccess = request.getRequestDispatcher("/reservation.html");
-					loginSuccess.forward(request, response);
+					rd = request.getRequestDispatcher("/reservation.html");
+					rd.forward(request, response);
 
 					//System.out.println("forwarded to reservation.html");
 					break;
@@ -255,10 +229,9 @@ public class MBServlet extends HttpServlet {
 				
 /*BOOK*/	case "book":
 				//System.out.println("Case acknowledged book request");
-				HttpSession userSess = request.getSession();
-
+				
 				//This session value is set when a user logs in. If it has null values, no-one has logged in.
-				CustomerBean customer = (CustomerBean) userSess.getAttribute("loggedInUser");
+				CustomerBean customer = (CustomerBean) session.getAttribute("loggedInUser");
 				try {
 					if (customer.getEmail()== null) {//no email saved in session for user
 
@@ -268,9 +241,9 @@ public class MBServlet extends HttpServlet {
 					e.printStackTrace();
 					//error, send to login
 					errorMessage = "You must be logged in to book a trip.";
-					userSess.setAttribute("errorMessage", errorMessage);
-					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
-					errPage.forward(request, response);
+					session.setAttribute("errorMessage", errorMessage);
+					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd.forward(request, response);
 					break;
 				}
 				catch (Exception ex) {ex.printStackTrace();}
@@ -292,30 +265,30 @@ public class MBServlet extends HttpServlet {
 					System.out.println("Reservation bean ready for checking");
 
 					//Validate reservation dates for availability
-					MBValidator mbVali = new MBValidator();
-					boolean available = mbVali.validateStay(resRequest, customer);
+					
+					boolean available = validator.validateStay(resRequest, customer);
 
 
 					if (available) {
 						//send to reservation confirmation
-						userSess.setAttribute("resRequest", resRequest);
-						RequestDispatcher confirm = request.getRequestDispatcher("reservationSummary.jsp");
-						confirm.forward(request, response);
+						session.setAttribute("resRequest", resRequest);
+						rd = request.getRequestDispatcher("reservationSummary.jsp");
+						rd.forward(request, response);
 						break;
 					}
 					else {
 						//send back to reservation page with error message
 						errorMessage = "The bed you selected is not available for the beginning of your stay.";
-						userSess.setAttribute("errorMessage", errorMessage);
-						RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
-						errPage.forward(request, response);
+						session.setAttribute("errorMessage", errorMessage);
+						rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+						rd.forward(request, response);
 						break;
 					}}
 				else {
 					errorMessage = "You must be logged in to make a reservation.";
-					userSess.setAttribute("errorMessage", errorMessage);
-					RequestDispatcher errPage = request.getRequestDispatcher("errorPages/loginError.jsp");
-					errPage.forward(request, response);
+					session.setAttribute("errorMessage", errorMessage);
+					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd.forward(request, response);
 					break;
 				}
 
@@ -324,26 +297,26 @@ public class MBServlet extends HttpServlet {
 /*CONFIRM*/	case "confirm":
 				System.out.println("summary confirmed ");
 				//pull in the reservation & guest info
-				userSess = request.getSession();
-				ReservationBean stayRequest = (ReservationBean) userSess.getAttribute("resRequest");
-				CustomerBean loggedInUser = (CustomerBean) userSess.getAttribute("loggedInUser");
+				session = request.getSession();
+				ReservationBean stayRequest = (ReservationBean) session.getAttribute("resRequest");
+				CustomerBean loggedInUser = (CustomerBean) session.getAttribute("loggedInUser");
 				//actually make reservation
-				MBValidator mbvali = new MBValidator();
-				String resultMessage = mbvali.confirmReservation(stayRequest, loggedInUser);
+				
+				String resultMessage = validator.confirmReservation(stayRequest, loggedInUser);
 				if(resultMessage.contains("error")){
 					//Alert customer reservation not made
 					//and break before success message
 					break;
 				}
 				
-				String successMsg= "<div class=\"alert\">"
+				successMsg= "<div class=\"alert\">"
 						+ "  <span class=\"closeAlert\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"
 						+ "  Success!"
 						+ "</div>";
-				userSess.setAttribute("successMsg", successMsg);
+				session.setAttribute("successMsg", successMsg);
 				//display success message somewhere?
-				RequestDispatcher sendConfirm = request.getRequestDispatcher("reservationSummary.jsp");
-				sendConfirm.forward(request, response);
+				rd = request.getRequestDispatcher("reservationSummary.jsp");
+				rd.forward(request, response);
 				break;
 
 //------------------------------------------------------------------				
@@ -351,21 +324,19 @@ public class MBServlet extends HttpServlet {
 /*CANCEL*/	case "cancel":
 
 				//redirect to reservation screen
-				RequestDispatcher errPage = request.getRequestDispatcher("reservation.html");
-				errPage.forward(request, response);
+				rd = request.getRequestDispatcher("reservation.html");
+				rd.forward(request, response);
 				break;
 				
 //-------------------------------------------------------------------
 				
 /*SRCH*/	case "searchByResNum":
-/*byRes#*/		HttpSession searchSess = request.getSession();
-				RequestDispatcher rd;
-				errorMessage = "";
-				CustomerBean searchUser = (CustomerBean) searchSess.getAttribute("loggedInUser");
+/*byRes#*/		errorMessage = "";
+				CustomerBean searchUser = (CustomerBean) session.getAttribute("loggedInUser");
 				if (searchUser==null) {
 					//redirect to errorpage
 					errorMessage = "You must be logged in to search for your reservation.";
-					searchSess.setAttribute("errorMessage", errorMessage);
+					session.setAttribute("errorMessage", errorMessage);
 					rd = request.getRequestDispatcher("lookup.jsp");
 					rd.forward(request, response);
 					break;
@@ -376,7 +347,7 @@ public class MBServlet extends HttpServlet {
 					int resNum = Integer.parseInt(request.getParameter("searchNumber"));
 					if (resNum <= 0) {
 						errorMessage = "You must enter a valid reservation number.";
-						searchSess.setAttribute("errorMessage", errorMessage);
+						session.setAttribute("errorMessage", errorMessage);
 						rd = request.getRequestDispatcher("lookup.jsp");
 						rd.forward(request, response);
 						break;
@@ -386,15 +357,15 @@ public class MBServlet extends HttpServlet {
 						ReservationBean searchResult = searchDAO.searchReservationNumber(resNum, searchUser);
 						//String testEmail = searchResult.getResOwnerEmail();
 						if (searchUser.getEmail().equals(searchResult.getResOwnerEmail())) {//If emails match
-							searchSess.setAttribute("searchResult", searchResult);//Make the results available
-							searchSess.setAttribute("insertTagWhenReady", "<ctag:displayReservation></ctag:displayReservation>");
+							session.setAttribute("searchResult", searchResult);//Make the results available
+							session.setAttribute("insertTagWhenReady", "<ctag:displayReservation></ctag:displayReservation>");
 							rd = request.getRequestDispatcher("lookup.jsp");
 							rd.forward(request, response);
 							break;
 						}
 						else {
 							errorMessage = "The email you logged in with doesn't match this reservation.";
-							searchSess.setAttribute("errorMessage", errorMessage);
+							session.setAttribute("errorMessage", errorMessage);
 							rd = request.getRequestDispatcher("lookup.jsp");
 							rd.forward(request, response);
 							break;
@@ -403,7 +374,7 @@ public class MBServlet extends HttpServlet {
 					}catch (Exception e) {
 						e.printStackTrace();
 						errorMessage = "That search had faulty results.";
-						searchSess.setAttribute("errorMessage", errorMessage);
+						session.setAttribute("errorMessage", errorMessage);
 						rd = request.getRequestDispatcher("lookup.jsp");
 						rd.forward(request, response);
 						break;
@@ -413,16 +384,14 @@ public class MBServlet extends HttpServlet {
 //------------------------------------------------------------------------				
 				
 /*SRCH*/	case "searchByEmail":
-/*by email*/	HttpSession selfSrch = request.getSession();
-				RequestDispatcher srchrd;
-				String errorM = "";
-				CustomerBean searcher = (CustomerBean) selfSrch.getAttribute("loggedInUser");
+/*by email*/	String errorM = "";
+				CustomerBean searcher = (CustomerBean) session.getAttribute("loggedInUser");
 				String enteredEmail = request.getParameter("searchEmail");
 				if(searcher==null) {
 					errorM = "You must be logged in to search for a reservation.";
-					selfSrch.setAttribute("errorMessage", errorM);
-					srchrd = request.getRequestDispatcher("lookup.jsp");
-					srchrd.forward(request, response);
+					session.setAttribute("errorMessage", errorM);
+					rd = request.getRequestDispatcher("lookup.jsp");
+					rd.forward(request, response);
 					break;
 				}
 				else if (enteredEmail.equals(searcher.getEmail())) {
@@ -431,25 +400,120 @@ public class MBServlet extends HttpServlet {
 						DataAccess emailSrchDAO = new DataAccess();
 						ArrayList<ReservationBean> userRezs = emailSrchDAO.searchUserEmail(searcher);
 						System.out.println("all bean results added, back to servlet");
-						selfSrch.setAttribute("userRezs", userRezs);
+						session.setAttribute("userRezs", userRezs);
 						System.out.println("bean list set in session");
-						//selfSrch.setAttribute("display", "<ctag:displayReservation></ctag:displayReservation>");
-						//System.out.println("display attribute set in session.");
-						srchrd=request.getRequestDispatcher("lookup.jsp");
-						srchrd.forward(request, response);
+						rd=request.getRequestDispatcher("lookup.jsp");
+						rd.forward(request, response);
 					}
 					catch(Exception e) {e.printStackTrace(); break;}
 				}
 				else {
 					errorM = "You can only look at your own reservations";
-					selfSrch.setAttribute("errorMessage", errorM);
-					srchrd = request.getRequestDispatcher("lookup.jsp");
-					srchrd.forward(request, response);
+					session.setAttribute("errorMessage", errorM);
+					rd = request.getRequestDispatcher("lookup.jsp");
+					rd.forward(request, response);
 					break;
 				}
 				
-				//search by email
-				//display all user reservations. 
+//-------------------------------------------------------------------------
+			case "contactUs":
+				
+				//Input validated in Validator class
+				String rawName = request.getParameter("fullname");
+				String rawConEmail= request.getParameter("email");
+				String rawConPhone = request.getParameter("phone");
+				String rawResNum = request.getParameter("reservation");
+				String rawSubj = request.getParameter("subject");
+				String rawMess = request.getParameter("message");
+				
+				boolean flagFullName = false;
+				boolean flagEmail = false;
+				boolean flagSubject = false;
+				boolean flagMess = false;
+				//Create message class/object-check
+				//Create message table in db & Moffat- check 
+				//filter filter- not check, need to migrate top section
+				
+				//set a new object to give to DAO for easy inputs
+				MessageBean newMess = new MessageBean();
+				
+// Validate name				
+				if (validator.checkFullName(rawName)) {
+					newMess.setFilteredFullName(rawName);
+					flagFullName=true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Full name should only include letters and spaces");
+				}
+				
+// Validate email				
+				if (validator.checkEmailInput(rawConEmail)) {
+					newMess.setFilteredEmail(rawConEmail);
+					flagEmail = true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Invalid email");
+				}
+				
+//Validate phone		add if not null since optional
+				if(rawConPhone == "") {newMess.setFilteredPhone("000-000-0000");}
+				else if(validator.checkPhoneInput(rawConPhone)) {
+					newMess.setFilteredPhone(rawConPhone);
+					
+				}
+				else {
+					session.setAttribute("errorMessage", "Invalid Phone");
+				}
+				//HTML restricts to int only, clean coming in.
+				newMess.setFilteredResNum(rawResNum);
+				
+//Validate Subject line				
+				if(validator.checkSubj(rawSubj)) {
+					newMess.setFilteredSubj(rawSubj);
+					flagSubject=true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Invalid Subject");
+				}
+				
+//Validate Message				
+				//if (validator.checkMessage(rawMess)) {
+					newMess.setFilteredMess(rawMess);
+					flagMess = true;
+				//}
+				//else {
+				//	session.setAttribute("errorMessage", "Invalid characters in message");
+				//}
+				
+//Set session bean				
+				session.setAttribute("messageBean", newMess);
+				
+				if (flagFullName && flagEmail && flagSubject && flagMess) {
+					//fails if there is a ';' in the message body due to non-escape
+					try {
+						DataAccess messageDAO = new DataAccess();
+						MessageBean currentNote = (MessageBean)session.getAttribute("messageBean");
+						String summary = messageDAO.addMessage(currentNote);
+						
+						if (summary.contains("error")) {
+								//error
+							session.setAttribute("errorMessage", "We were unable to submit your message.");
+						}
+						else {
+							//successful submit
+							session.setAttribute("successMsg", "Message received! We will reach out as soon as possible.");
+						}
+						
+					}// end try
+					catch (Exception e) {
+						e.printStackTrace();
+						session.setAttribute("errorMessage", "We are unable to process the request at this time.");
+					}//end catch
+					
+				}//end if
+				rd = request.getRequestDispatcher("ContactUs.jsp");
+				rd.forward(request, response);
+				break;
 				
 			}//end switch
 		}//end ifs
