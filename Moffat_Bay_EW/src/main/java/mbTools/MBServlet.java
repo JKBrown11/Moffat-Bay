@@ -331,7 +331,7 @@ public class MBServlet extends HttpServlet {
 //-------------------------------------------------------------------
 				
 /*SRCH*/	case "searchByResNum":
-/*byRes#*/		//errorMessage = "";
+/*byRes#*/		errorMessage = "";
 				CustomerBean searchUser = (CustomerBean) session.getAttribute("loggedInUser");
 				if (searchUser==null) {
 					//redirect to errorpage
@@ -418,54 +418,99 @@ public class MBServlet extends HttpServlet {
 //-------------------------------------------------------------------------
 			case "contactUs":
 				
-				//ALL UNFILTERED
-				//Consider moving register logic to validator as intended to
-				// reuse here
-				String rawName = request.getParameter("name");
+				//Input validated in Validator class
+				String rawName = request.getParameter("fullname");
 				String rawConEmail= request.getParameter("email");
 				String rawConPhone = request.getParameter("phone");
 				String rawResNum = request.getParameter("reservation");
 				String rawSubj = request.getParameter("subject");
 				String rawMess = request.getParameter("message");
 				
+				boolean flagFullName = false;
+				boolean flagEmail = false;
+				boolean flagSubject = false;
+				boolean flagMess = false;
 				//Create message class/object-check
 				//Create message table in db & Moffat- check 
 				//filter filter- not check, need to migrate top section
 				
 				//set a new object to give to DAO for easy inputs
 				MessageBean newMess = new MessageBean();
-				if (validator.checkFirstName(rawName)) {
+				
+// Validate name				
+				if (validator.checkFullName(rawName)) {
 					newMess.setFilteredFullName(rawName);
-				}	
+					flagFullName=true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Full name should only include letters and spaces");
+				}
+				
+// Validate email				
 				if (validator.checkEmailInput(rawConEmail)) {
 					newMess.setFilteredEmail(rawConEmail);
-				}	
-				if(validator.checkPhoneInput(rawConPhone)) {
+					flagEmail = true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Invalid email");
+				}
+				
+//Validate phone		add if not null since optional
+				if(rawConPhone == "") {newMess.setFilteredPhone("000-000-0000");}
+				else if(validator.checkPhoneInput(rawConPhone)) {
 					newMess.setFilteredPhone(rawConPhone);
+					
 				}
+				else {
+					session.setAttribute("errorMessage", "Invalid Phone");
+				}
+				//HTML restricts to int only, clean coming in.
 				newMess.setFilteredResNum(rawResNum);
-				newMess.setFilteredSubj(rawSubj);
-				newMess.setFilteredMess(rawMess);
 				
+//Validate Subject line				
+				if(validator.checkSubj(rawSubj)) {
+					newMess.setFilteredSubj(rawSubj);
+					flagSubject=true;
+				}
+				else {
+					session.setAttribute("errorMessage", "Invalid Subject");
+				}
 				
-				//fails if there is a ';' in the message body due to non-escape
-				try {
-					DataAccess messageDAO = new DataAccess();
-					String summary = messageDAO.addMessage(newMess);
-					if (summary.contains("error")) {
-						//error
-						session.setAttribute("errorMessage", "We were unable to submit your message.");
+//Validate Message				
+				//if (validator.checkMessage(rawMess)) {
+					newMess.setFilteredMess(rawMess);
+					flagMess = true;
+				//}
+				//else {
+				//	session.setAttribute("errorMessage", "Invalid characters in message");
+				//}
+				
+//Set session bean				
+				session.setAttribute("messageBean", newMess);
+				
+				if (flagFullName && flagEmail && flagSubject && flagMess) {
+					//fails if there is a ';' in the message body due to non-escape
+					try {
+						DataAccess messageDAO = new DataAccess();
+						MessageBean currentNote = (MessageBean)session.getAttribute("messageBean");
+						String summary = messageDAO.addMessage(currentNote);
 						
-					}
-					else {
-						//successful submit
-						session.setAttribute("successMsg", "Message received! We will reach out as soon as possible.");
-					}
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-					session.setAttribute("errorMessage", "We are unable to process the request at this time.");
-				}
+						if (summary.contains("error")) {
+								//error
+							session.setAttribute("errorMessage", "We were unable to submit your message.");
+						}
+						else {
+							//successful submit
+							session.setAttribute("successMsg", "Message received! We will reach out as soon as possible.");
+						}
+						
+					}// end try
+					catch (Exception e) {
+						e.printStackTrace();
+						session.setAttribute("errorMessage", "We are unable to process the request at this time.");
+					}//end catch
+					
+				}//end if
 				rd = request.getRequestDispatcher("ContactUs.jsp");
 				rd.forward(request, response);
 				break;

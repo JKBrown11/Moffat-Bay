@@ -25,7 +25,7 @@
         <h1>Contact Us</h1>
         <form action="/MoffatBay/MBServlet" method="post">
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            <input type="text" id="name" name="fullname" placeholder="Enter your full name" required>
             
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email address" required>

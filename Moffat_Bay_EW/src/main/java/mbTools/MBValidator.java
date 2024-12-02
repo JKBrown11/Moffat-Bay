@@ -6,8 +6,9 @@ import javax.servlet.http.HttpSession;
 
 public class MBValidator {
 	
-
-
+	private String messageReg = "(?:\\w*\\s*)*(?:[\\'\\.\\!\\?\\,\\;]*)";
+	private String subjectReg = "[\\w ]*";
+	private String fullNameReg = "(?:\\w* \\w*)";
 	private String alphaOnly = "[a-zA-Z']+"; //abc only, verified on regEx101
 	private String tenDigitPhone = "[0-9]{10}";
 	private String dashedPhone = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})"; //verified on regEx101 to accept 123-234-5678 format string
@@ -181,6 +182,14 @@ public class MBValidator {
 		else return false;
 	}
 	
+	public boolean checkFullName(String rawFullName) {
+		if (rawFullName.matches(fullNameReg)) {
+			System.out.println("raw input matched regex for full name");
+			return true;
+		}
+		else return false;
+	}
+	
 	//Validate email resembles traditional format
 	public boolean checkEmailInput(String rawEmail) {
 		//Validate email resembles traditional format
@@ -193,6 +202,7 @@ public class MBValidator {
 	}
 	
 	public boolean checkPhoneInput(String rawPhone) {
+		System.out.println("checkPhone run");
 		if (rawPhone.matches(tenDigitPhone) || rawPhone.matches(dashedPhone)) {
 			return true;
 		}
@@ -205,6 +215,21 @@ public class MBValidator {
 		}
 		else return false;
 	}
-
+	
+	public boolean checkSubj(String rawSubj) {
+		if (rawSubj.matches(subjectReg)) {
+			System.out.println("subject passed");
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkMessage(String rawMessage) {
+		if (rawMessage.matches(messageReg)) {
+			System.out.println("messsage passed");
+			return true;
+		}
+		else return false;
+	}
 
 }//end class
