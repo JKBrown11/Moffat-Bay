@@ -33,7 +33,11 @@ public class MessageBean {
 		return filteredResNum;
 	}
 	public void setFilteredResNum(String filteredResNum) {
-		this.filteredResNum = Integer.parseInt(filteredResNum);
+		if(filteredResNum.equals("")) {
+			this.filteredResNum = 0;
+		}
+		else
+			this.filteredResNum = Integer.parseInt(filteredResNum);
 	}
 	public String getFilteredSubj() {
 		return filteredSubj;

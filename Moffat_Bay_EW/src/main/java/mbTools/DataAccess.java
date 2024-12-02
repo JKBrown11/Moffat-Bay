@@ -185,7 +185,7 @@ public class DataAccess {
 			if (queryResults != null) {
 				queryResults.next();
 				searchedStay.setResNumber(queryResults.getInt(1));
-				System.out.println("PUlled res number");
+				System.out.println("Pulled res number");
 				searchedStay.setResOwnerEmail(queryResults.getString(2));
 				System.out.println("setResOwnerEmail run");
 				searchedStay.setCheckInDate(queryResults.getString(3));
@@ -241,12 +241,15 @@ public class DataAccess {
 	 * Function to submit a message from servlet
 	 * 
 	 * */
-	public void addMessage(MessageBean message) {
+	public String addMessage(MessageBean message) {
 		String insertUpdate= "INSERT INTO mblodge.customer_messages "
-				+" (fullname, CTemail, CTphone, CTresNum, CTsubj, CTmessage) VALUES "
+				+" (fullname, email, phone, resNum, subj, message) VALUES "
 				+ "('" + message.getFilteredFullName() + "','" + message.getFilteredEmail() + "','" 
 				+ message.getFilteredPhone() + "'," + message.getFilteredResNum()+ ",'" 
 				+ message.getFilteredSubj() + "','" + message.getFilteredMess() + "')";
+		
+		String resultMessage = makeUpdate(insertUpdate);
+		return resultMessage;
 	}
 	
 	

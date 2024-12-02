@@ -40,6 +40,7 @@ public class MBServlet extends HttpServlet {
 		//Utilize hidden inputs to denote post request source
 		String from = request.getParameter("myrequest");
 		String errorMessage = "";
+		String successMsg = "";
 		//If there is a request value received:
 		if (from != null) {
 			switch (from){
@@ -336,7 +337,7 @@ public class MBServlet extends HttpServlet {
 					break;
 				}
 				
-				String successMsg= "<div class=\"alert\">"
+				successMsg= "<div class=\"alert\">"
 						+ "  <span class=\"closeAlert\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"
 						+ "  Success!"
 						+ "</div>";
@@ -451,6 +452,7 @@ public class MBServlet extends HttpServlet {
 //-------------------------------------------------------------------------
 			case "contactUs":
 				HttpSession contactSess = request.getSession();
+				RequestDispatcher rdC;
 				//ALL UNFILTERED
 				//Consider moving register logic to validator as intended to
 				// reuse here
@@ -474,12 +476,27 @@ public class MBServlet extends HttpServlet {
 				newMess.setFilteredSubj(rawSubj);
 				newMess.setFilteredMess(rawMess);
 				
+				
+				//fails if there is a ';' in the message body due to non-escape
 				try {
 					DataAccess messageDAO = new DataAccess();
-					messageDAO.addMessage(newMess);
+					String summary = messageDAO.addMessage(newMess);
+					if (summary.contains("error")) {
+						//error
+						contactSess.setAttribute("errorMessage", "We were unable to submit your message.");
+						
+					}
+					else {
+						//successful submit
+						contactSess.setAttribute("successMsg", "Message received! We will reach out as soon as possible.");
+					}
 				}
-				
-				
+				catch (Exception e) {
+					e.printStackTrace();
+					contactSess.setAttribute("errorMessage", "We are unable to process the request at this time.");
+				}
+				rdC = request.getRequestDispatcher("ContactUs.jsp");
+				rdC.forward(request, response);
 				break;
 				
 			}//end switch
