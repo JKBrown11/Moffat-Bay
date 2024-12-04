@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(101, 233, 240, 0.8);
+}
+
+header {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #847968;
+    padding: 10px 0;
+}
+
+.navbar a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #5c5648;
+}
+
+.navbar a.active {
+    background-color: #5c5648;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.message-container {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #5c5648;
+}
+
+.message-container p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.details {
+    margin: 20px auto;
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.8em;
+    text-align: center;
+}
+
+.details p {
+    margin: 10px 0;
+}
+
+.success {
+    color: #4CAF50;
+}
+
+.error {
+    color: #F44336;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #847968;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #5c5648;
+}
