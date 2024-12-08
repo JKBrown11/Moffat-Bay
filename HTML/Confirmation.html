@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmation - Moffat Bay Resort</title>
+    <link rel="stylesheet" href="confirmation.css">
+</head>
+<body>
+    <header>
+        <h1>Moffat Bay Resort</h1>
+    </header>
+    <nav class="navbar">
+        <a href="home.html">Home</a>
+        <a href="Registration.html">Registration</a>
+        <a href="attractions.html">Attractions</a>
+        <a href="cabins.html" class="active">Reservations</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </nav>
+    <div class="container">
+        <div class="message-container">
+            <!-- User Success Message -->
+            <h2 class="success">Reservation Confirmed!</h2>
+            <p>Thank you, <span id="customerName">John Doe</span>! Your reservation has been successfully booked.</p>
+            <div class="details"> <!-- I inserted some sample text below as a placeholder until logic is completed to populate the 
+                information from the stored database -->
+                <p><strong>Bed Type:</strong> <span id="bedType">King Size</span></p>
+                <p><strong>Check-in Date:</strong> <span id="checkinDate">2024-12-10</span></p>
+                <p><strong>Check-out Date:</strong> <span id="checkoutDate">2024-12-15</span></p>
+                <p><strong>Total Price:</strong> <span id="totalPrice">$160</span></p>
+            </div>
+            <a href="cabins.html" class="btn">Reserve Another Getaway!</a>
+
+            <!-- User Error Message -->
+            <h2 class="error" style="display: none;">Reservation Failed</h2>
+            <p class="error" style="display: none;">Sorry, we could not process your reservation at this time. Please try again later or contact us for assistance.</p>
+            <a href="cabins.html" class="btn" style="display: none;">Try Again</a>
+        </div>
+    </div>
+</body>
+</html>
