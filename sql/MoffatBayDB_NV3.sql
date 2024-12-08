@@ -45,4 +45,22 @@ INSERT INTO reservations (email, check_in_date, check_out_date, bed_size, party_
 VALUES 
     ('bobker@example.com', '2024-04-15', '2024-04-18', 'KING', 2), 
     ('bobker@example.com', '2023-07-20', '2024-07-25', '2QUEEN', 3);
-    
+ 
+ 
+ -- Table to hold info from contact us
+ CREATE TABLE mblodge.customer_messages (
+fullName VARCHAR(30) NOT NULL, 
+email VARCHAR(45) NOT NULL,
+phone VARCHAR(12),
+resNum int,
+subj VARCHAR(50) NOT NULL,
+message mediumtext NOT NULL,
+submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+messageNumber int auto_increment PRIMARY KEY
+);
+ALTER TABLE mblodge.customer_messages AUTO_INCREMENT=7600;
+
+
+
+
+

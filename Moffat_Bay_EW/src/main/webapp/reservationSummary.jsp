@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/reservationpage.css">
@@ -13,12 +14,13 @@
  	<div class="resort-name">Moffat Bay Resorts</div>
  
    	<div class="top-tabs">
-    	<a href="/MoffatBay/MoffatHome.html">Home</a>
-    	<a href="/MoffatBay/reservation.html">Book Now!</a>
-    	<a href="#tab3">Activities</a>
-    	<a href="#tab4">Contact Us</a>
-    	<a href="aboutus_jg.html">About Us</a>
-    	<a href="/MoffatBay/login.html">Login</a>  
+    <a href="/MoffatBay/MoffatHome.html">Home</a>
+    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
+    <a href="/MoffatBay/lookup.jsp">Look Up</a>
+    <a href="#tab3">Activities</a>
+    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
+    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
+    <a href="/MoffatBay/login.html">Login</a>   
   	</div>
   	<div class= "form-grid">
 	<div class="content-section">
@@ -29,15 +31,19 @@
 		Bed summary: ${resRequest.getRoomType()}<br>
 
 	<form action="/MoffatBay/MBServlet" method="POST" class="reservationSummary">
-		<input type="button" name="confirm-btn" value="Confirm" />
 		<input type="hidden" name="myrequest" value="confirm" />
+		<input type="submit" name="confirm-btn" value="Confirm" />
 	</form>
+	
 	<form action="/MoffatBay/MBServlet" method="POST" class="reservationSummary">
-		<input type="button" name="cancel-btn" value="Cancel" />
 		<input type="hidden" name="myrequest" value="cancel" />
+		<input type="submit" name="cancel-btn" value="Cancel" />
 	</form>
+	${successMsg};
+	
 	</div> 
 	</div>
+
 
 <!--  Both the reservation and customer objects should be available by el here
 and be pretty much loaded. I didn't import passwords from the customer though. Only email.  -->
