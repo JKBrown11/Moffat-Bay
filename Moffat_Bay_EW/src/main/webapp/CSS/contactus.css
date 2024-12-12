@@ -10,6 +10,12 @@ body {
     background-position: top;
 }
 
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 header {
     position: relative;
     padding: 20px;

@@ -10,7 +10,7 @@ body {
 .banner{
 	margin-top: 0;
 	width: 100%;
-	aspect-ratio: 5/1;	
+	/* aspect-ratio: 4/1; */	
 	justify-content:center;
 }
 
