@@ -22,7 +22,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: top;
+  z-index: 2;
 }
 
 .top-tabs {
@@ -30,7 +30,7 @@ body {
   justify-content: center;
   background-color: #847968;
   padding: 10px 0;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 
 .top-tabs a {
