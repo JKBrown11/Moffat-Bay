@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,22 +10,24 @@
 <link rel="stylesheet" href="CSS/moffat2.css"/>
 </head>
 <body class = "login">
-<a href="/MoffatBay/MoffatHome.html" class="logo">
-    <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100">
-</a>
-<div class="welcome-message">
-<h2>Welcome to Moffat Bay Resorts</h2>
-</div>
+<!-- Converting to JSP and using include for one stop editing of Nav links.  -->
+<%@ include file="CSS/nav_menu.html"%>
+<!-- <a href="/MoffatBay/MoffatHome.html" class="logo"> -->
+<!--     <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100"> -->
+<!-- </a> -->
+<!-- <div class="welcome-message"> -->
+<!-- <h2>Welcome to Moffat Bay Resorts</h2> -->
+<!-- </div> -->
 
-<div class="top-tabs">
-    <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
-    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Attractions</a>
-    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a>   
-</div>
+<!-- <div class="top-tabs"> -->
+<!--     <a href="/MoffatBay/MoffatHome.html">Home</a> -->
+<!--     <a href="/MoffatBay/reservation.html">Book A Trip!</a> -->
+<!--     <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
+<!--     <a href="/MoffatBay/Attractions.html">Attractions</a> -->
+<!--     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
+<!--     <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
+<!--     <a href="/MoffatBay/login.html">Login</a>    -->
+<!-- </div> -->
 
 
 
