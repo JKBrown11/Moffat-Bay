@@ -9,23 +9,24 @@
 <link rel="stylesheet" href="CSS/registrationpage.css">
 </head>
 <body>
-<a href="/MoffatBay/MoffatHome.html" class="logo">
-    <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100">
-</a>
+<%@ include file="CSS/nav_menu.html"%>
+<!-- <a href="/MoffatBay/MoffatHome.html" class="logo"> -->
+<!--     <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100"> -->
+<!-- </a> -->
 
-<div class="welcome-message">
-	<h2>Welcome to Moffat Bay Resorts</h2>
-</div>
+<!-- <div class="welcome-message"> -->
+<!-- 	<h2>Welcome to Moffat Bay Resorts</h2> -->
+<!-- </div> -->
 
-<div class="top-tabs">
-    <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.jsp">Book A Trip!</a>
-    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Attractions</a>
-    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.jsp">Login</a>  
-</div>
+<!-- <div class="top-tabs"> -->
+<!--     <a href="/MoffatBay/MoffatHome.html">Home</a> -->
+<!--     <a href="/MoffatBay/reservation.jsp">Book A Trip!</a> -->
+<!--     <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
+<!--     <a href="/MoffatBay/Attractions.html">Attractions</a> -->
+<!--     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
+<!--     <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
+<!--     <a href="/MoffatBay/login.jsp">Login</a>   -->
+<!-- </div> -->
 
 <div class="registration-container">
   <h2>Create an Account</h2>
