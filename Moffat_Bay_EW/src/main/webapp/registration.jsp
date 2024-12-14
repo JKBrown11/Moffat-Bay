@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="CSS/registrationpage.css">
 </head>
 <body>
-
+<a href="/MoffatBay/MoffatHome.html" class="logo">
+    <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100">
+</a>
 
 <div class="welcome-message">
-<h2>Welcome to Moffat Bay Resorts</h2>
+	<h2>Welcome to Moffat Bay Resorts</h2>
 </div>
 
 <div class="top-tabs">
@@ -22,7 +24,7 @@
     <a href="/MoffatBay/Attractions.html">Attractions</a>
     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
     <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a>  
+    <a href="/MoffatBay/login.jsp">Login</a>  
 </div>
 
 <div class="registration-container">
