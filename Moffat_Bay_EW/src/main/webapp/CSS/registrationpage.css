@@ -24,9 +24,7 @@ body {
   background-color: #847968;
   padding: 10px 0;
   margin-top: 50px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  
 }
 
 .top-tabs a {
