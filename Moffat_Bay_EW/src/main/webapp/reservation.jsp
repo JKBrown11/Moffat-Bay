@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +12,7 @@ jsp version because they match the java. This may potentially end up as jsp too,
   <link rel="stylesheet" href="CSS/reservationpage.css">
 </head>
 <body>
+<%@ include file="CSS/nav_menu.html"%>
   <div class="background-image"></div>
 
   <a href="/MoffatBay/MoffatHome.html" class="logo">
@@ -22,7 +25,7 @@ jsp version because they match the java. This may potentially end up as jsp too,
     <a href="/MoffatBay/MoffatHome.html">Home</a>
     <a href="/MoffatBay/reservation.html">Book A Trip!</a>
     <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Attractions</a>
+    <a href="/MoffatBay/Attractions.jsp">Attractions</a>
     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
     <a href="/MoffatBay/aboutus_jg.html">About Us</a>
     <a href="/MoffatBay/login.html">Login</a>  

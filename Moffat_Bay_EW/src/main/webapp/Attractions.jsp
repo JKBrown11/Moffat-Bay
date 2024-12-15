@@ -1,28 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attractions - Moffat Bay Resort</title>
-    <link rel="stylesheet" href="attractions.css">
+    <link rel="stylesheet" href="CSS/moffat2.css">
 </head>
 <body>
-    <header>
-        <h1>Moffat Bay Resort</h1>
-    </header>
-    <a href="/MoffatBay/MoffatHome.html" class="logo">
-    	<img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100">
-  	</a>
-    <nav class="navbar">
-        <a href="/MoffatBay/MoffatHome.html">Home</a>
-	    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
-	    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-	    <a href="/MoffatBay/Attractions.html">Attractions</a>
-	    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-	    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-	    <a href="/MoffatBay/login.html">Login</a>   
-    </nav>
-    <div class="container">
+<%@ include file="CSS/nav_menu.html"%>
+<!--     <header> -->
+<!--         <h1>Moffat Bay Resort</h1> -->
+<!--     </header> -->
+<!--     <a href="/MoffatBay/MoffatHome.html" class="logo"> -->
+<!--     	<img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100"> -->
+<!--   	</a> -->
+<!--     <nav class="navbar"> -->
+<!--         <a href="/MoffatBay/MoffatHome.html">Home</a> -->
+<!-- 	    <a href="/MoffatBay/reservation.html">Book A Trip!</a> -->
+<!-- 	    <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
+<!-- 	    <a href="/MoffatBay/Attractions.html">Attractions</a> -->
+<!-- 	    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
+<!-- 	    <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
+<!-- 	    <a href="/MoffatBay/login.html">Login</a>    -->
+<!--     </nav> -->
+    <div class="attraction-container">
         <h1>Attractions</h1>
         <div class="attraction">
             <a href="https://en.wikipedia.org/wiki/Hiking/" target="_blank" > <!-- placeholder for our "hiking link, we can link to a hiking site just to show functionality -->

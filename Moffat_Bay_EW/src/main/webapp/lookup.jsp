@@ -12,18 +12,7 @@ pageEncoding="UTF-8" %>
 </head>
 <body>
 <%@ include file="CSS/nav_menu.html" %>
-<!--     <header> -->
-<!--         <h1>Moffat Bay Resort</h1> -->
-<!--     </header> -->
-<!--     <nav class="navbar"> -->
-<!--     <a href="/MoffatBay/MoffatHome.html">Home</a> -->
-<!--     <a href="/MoffatBay/reservation.html">Book A Trip!</a> -->
-<!--     <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
-<!--     <a href="/MoffatBay/Attractions.html">Attractions</a> -->
-<!--     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
-<!--     <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
-<!--     <a href="/MoffatBay/login.html">Login</a>  -->
-<!--     </nav> -->
+
     <div class="container">
         <h1>Look Up Reservation</h1>
         
