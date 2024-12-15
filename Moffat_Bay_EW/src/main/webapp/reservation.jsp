@@ -13,23 +13,23 @@ jsp version because they match the java. This may potentially end up as jsp too,
 </head>
 <body>
 <%@ include file="CSS/nav_menu.html"%>
-  <div class="background-image"></div>
+<!--   <div class="background-image"></div> -->
 
-  <a href="/MoffatBay/MoffatHome.html" class="logo">
-    <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100">
-  </a>
+<!--   <a href="/MoffatBay/MoffatHome.html" class="logo"> -->
+<!--     <img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100"> -->
+<!--   </a> -->
 
-  <div class="resort-name">Moffat Bay Resorts</div>
+<!--   <div class="resort-name">Moffat Bay Resorts</div> -->
 
-  <div class="top-tabs">
-    <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
-    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.jsp">Attractions</a>
-    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a>  
-  </div>
+<!--   <div class="top-tabs"> -->
+<!--     <a href="/MoffatBay/MoffatHome.html">Home</a> -->
+<!--     <a href="/MoffatBay/reservation.html">Book A Trip!</a> -->
+<!--     <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
+<!--     <a href="/MoffatBay/Attractions.jsp">Attractions</a> -->
+<!--     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
+<!--     <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
+<!--     <a href="/MoffatBay/login.html">Login</a>   -->
+<!--   </div> -->
 
   <div class="content-section">
     <h1>Reserve Your Stay at Moffat Bay Resort</h1>
