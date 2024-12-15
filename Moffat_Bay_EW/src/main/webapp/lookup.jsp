@@ -7,21 +7,12 @@ pageEncoding="UTF-8" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation Lookup - Moffat Bay Resort</title>
-    <link rel="stylesheet" href="CSS/contactus.css"> <!-- Reused the CSS from the contact us page -->
+    <!-- <link rel="stylesheet" href="CSS/contactus.css"> --> <!-- Reused the CSS from the contact us page -->
+    <link rel="stylesheet" href="CSS/moffat2.css">
 </head>
 <body>
-    <header>
-        <h1>Moffat Bay Resort</h1>
-    </header>
-    <nav class="navbar">
-    <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
-    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Attractions</a>
-    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a> 
-    </nav>
+<%@ include file="CSS/nav_menu.html" %>
+
     <div class="container">
         <h1>Look Up Reservation</h1>
         

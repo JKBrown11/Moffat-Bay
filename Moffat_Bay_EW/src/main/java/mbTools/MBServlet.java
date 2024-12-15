@@ -163,7 +163,7 @@ public class MBServlet extends HttpServlet {
 
 					System.out.println("customer added to db");
 
-					rd = request.getRequestDispatcher("/login.html");
+					rd = request.getRequestDispatcher("/login.jsp");
 					rd.forward(request, response);
 
 					break;
@@ -198,7 +198,7 @@ public class MBServlet extends HttpServlet {
 					//set session error message to retrieve on error page
 					errorMessage = "Your login was not successful due to incorrect email or password.";
 					session.setAttribute("errorMessage", errorMessage);
-					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd = request.getRequestDispatcher("/loginError.jsp");
 					rd.forward(request, response);
 
 					break;
@@ -218,10 +218,10 @@ public class MBServlet extends HttpServlet {
 					//set attribute as customer bean for reservation summary
 					session.setAttribute("loggedInUser", loggedInUser);
 
-					rd = request.getRequestDispatcher("/reservation.html");
+					rd = request.getRequestDispatcher("/reservation.jsp");
 					rd.forward(request, response);
 
-					//System.out.println("forwarded to reservation.html");
+					//System.out.println("forwarded to reservation.jsp");
 					break;
 				}//end else
 
@@ -242,7 +242,7 @@ public class MBServlet extends HttpServlet {
 					//error, send to login
 					errorMessage = "You must be logged in to book a trip.";
 					session.setAttribute("errorMessage", errorMessage);
-					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd = request.getRequestDispatcher("/loginError.jsp");
 					rd.forward(request, response);
 					break;
 				}
@@ -280,14 +280,14 @@ public class MBServlet extends HttpServlet {
 						//send back to reservation page with error message
 						errorMessage = "The bed you selected is not available for the beginning of your stay.";
 						session.setAttribute("errorMessage", errorMessage);
-						rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+						rd = request.getRequestDispatcher("/loginError.jsp");
 						rd.forward(request, response);
 						break;
 					}}
 				else {
 					errorMessage = "You must be logged in to make a reservation.";
 					session.setAttribute("errorMessage", errorMessage);
-					rd = request.getRequestDispatcher("errorPages/loginError.jsp");
+					rd = request.getRequestDispatcher("/loginError.jsp");
 					rd.forward(request, response);
 					break;
 				}
@@ -324,7 +324,7 @@ public class MBServlet extends HttpServlet {
 /*CANCEL*/	case "cancel":
 
 				//redirect to reservation screen
-				rd = request.getRequestDispatcher("reservation.html");
+				rd = request.getRequestDispatcher("reservation.jsp");
 				rd.forward(request, response);
 				break;
 				
