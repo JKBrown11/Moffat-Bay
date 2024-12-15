@@ -10,26 +10,12 @@
 </head>
 <body>
 <%@ include file="CSS/nav_menu.html"%>
-<!--     <header> -->
-<!--         <h1>Moffat Bay Resort</h1> -->
-<!--     </header> -->
-<!--     <a href="/MoffatBay/MoffatHome.html" class="logo"> -->
-<!--     	<img src="images-refined/mooseIcon.png" alt="Moffat Bay Logo" width="100"> -->
-<!--   	</a> -->
-<!--     <nav class="navbar"> -->
-<!--         <a href="/MoffatBay/MoffatHome.html">Home</a> -->
-<!-- 	    <a href="/MoffatBay/reservation.html">Book A Trip!</a> -->
-<!-- 	    <a href="/MoffatBay/lookup.jsp">Look Up</a> -->
-<!-- 	    <a href="/MoffatBay/Attractions.html">Attractions</a> -->
-<!-- 	    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a> -->
-<!-- 	    <a href="/MoffatBay/aboutus_jg.html">About Us</a> -->
-<!-- 	    <a href="/MoffatBay/login.html">Login</a>    -->
-<!--     </nav> -->
+
     <div class="attraction-container">
         <h1>Attractions</h1>
         <div class="attraction">
-            <a href="https://en.wikipedia.org/wiki/Hiking/" target="_blank" > <!-- placeholder for our "hiking link, we can link to a hiking site just to show functionality -->
-                <img src="images/group-hiking.jpg" alt="People Hiking"> <!-- We need to decide on which image to use  -->
+            <a href="https://coastalbliss.ca/Hiking-West_Coast_Trail.shtml" target="_blank" > 
+                <img src="images/group-hiking.jpg" alt="People Hiking"> 
             </a>
             <h2>Hiking</h2>
             <p>Embark on an amazing adventure with hiking at Moffat Bay Beach Resort, where nature's beauty meets the thrill of exploration! 
@@ -38,9 +24,9 @@
                 abundant wildlife. With every step, you will immerse yourself in the tranquility of the outdoors, away from the rush of everyday life. 
                 Experience the magic of Moffat Bay Resort and let the journey rejuvenate your spirit!</p>
         </div>
-        <div class="attraction"> <!-- I inserted some sample images just to give you an idea of how the site will look once we decide on which images to use  -->
-            <a href="https://en.wikipedia.org/wiki/Kayaking#:~:text=Kayaking%20is%20the%20use%20of,of%20blades%20on%20the%20paddle/" target="_blank" > <!-- placeholder for our "kayaking link, we can link to a kayaking site just to show functionality -->
-                <img src="images/travel-travel-mexico.jpg" alt="People Kayaking"> <!-- We need to decide on which image to use  -->
+        <div class="attraction">
+            <a href="https://flatwaterkayakclub.com/explore/kayak-mountain-view" target="_blank" > 
+                <img src="images/travel-travel-mexico.jpg" alt="People Kayaking"> 
             </a>
             <h2>Kayaking</h2>
             <p>Set out on an unforgettable kayaking adventure at Moffat Bay Beach Resort! Glide through serene, crystal-clear waters as you explore hidden coves, 
@@ -49,8 +35,9 @@
                 experience with family and friends, every moment is filled with beauty and discovery. Gear up and let the calm waves guide you to a relaxing experience.</p>
         </div>
         <div class="attraction">
-            <a href="https://en.wikipedia.org/wiki/Whale_watching/" target="_blank"> <!-- placeholder for our "whale watching link, we can link to a whale watching site just to show functionality -->
-                <img src="images/whale-watching.jpg" alt="Whales Swimming"> <!-- We need to decide on which image to use  -->
+            <a href="https://www.viator.com/tours/Monterey-and-Carmel/Monterey-Whale-Watching-Tour/d5250-362397P1?m=28353&supag=153710049013&supca=20578700387&supsc=dsa-1456167871416&supai=698995753631&supdv=c&supnt=g&suplp=9010691&supli=&supti=dsa-1456167871416&tsem=true&supci=dsa-1456167871416&supap1=&supap2=&gad_source=1&gclid=EAIaIQobChMIqumpxtGoigMVvqNaBR3qTgBvEAAYASAAEgLX6vD_BwE" 
+            	target="_blank"> 
+                <img src="images/whale-watching.jpg" alt="Whales Swimming"> 
             </a>
             <h2>Whale Watching</h2>
             <p>Experience the awe-inspiring majesty of the ocean with whale watching at Moffat Bay Beach Resort! Set sail on a breathtaking adventure 
@@ -60,8 +47,8 @@
                 and create memories that will last forever. Your adventure awaits at Moffat Bay!</p>
         </div>
         <div class="attraction">
-            <a href="https://en.wikipedia.org/wiki/Scuba_diving/" target="_blank"> <!-- placeholder for our "scuba diving link, we can link to a scuba diving site just to show functionality -->
-                <img src="images/scuba-divers.jpg" alt="Scuba Divers"> <!-- We need to decide on which image to use  -->
+            <a href="https://www.divessi.com/en/home" target="_blank"> 
+                <img src="images/scuba-divers.jpg" alt="Scuba Divers"> 
             </a>
             <h2>Scuba Diving</h2>
             <p>Dive into a world of wonder with scuba diving at Moffat Bay Beach Resort! Explore vibrant coral reefs teeming with marine life, 
