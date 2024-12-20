@@ -15,12 +15,12 @@
  
    	<div class="top-tabs">
     <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.html">Book A Trip!</a>
+    <a href="/MoffatBay/reservation.jsp">Book A Trip!</a>
     <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Activities</a>
+    <a href="/MoffatBay/Attractions.jsp">Attractions</a>
     <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
     <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a>   
+    <a href="/MoffatBay/login.jsp">Login</a>   
   	</div>
   	<div class= "form-grid">
 	<div class="content-section">

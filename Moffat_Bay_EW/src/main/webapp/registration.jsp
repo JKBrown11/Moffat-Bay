@@ -6,24 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registration Page - Moffat Bay Resorts</title>
-<link rel="stylesheet" href="CSS/registrationpage.css">
+<link rel="stylesheet" href="CSS/moffat2.css">
 </head>
 <body>
+<%@ include file="CSS/nav_menu.html"%>
 
-
-<div class="welcome-message">
-<h2>Welcome to Moffat Bay Resorts</h2>
-</div>
-
-<div class="top-tabs">
-    <a href="/MoffatBay/MoffatHome.html">Home</a>
-    <a href="/MoffatBay/reservation.jsp">Book A Trip!</a>
-    <a href="/MoffatBay/lookup.jsp">Look Up</a>
-    <a href="/MoffatBay/Attractions.html">Activities</a>
-    <a href="/MoffatBay/ContactUs.jsp">Contact Us</a>
-    <a href="/MoffatBay/aboutus_jg.html">About Us</a>
-    <a href="/MoffatBay/login.html">Login</a>  
-</div>
 
 <div class="registration-container">
   <h2>Create an Account</h2>

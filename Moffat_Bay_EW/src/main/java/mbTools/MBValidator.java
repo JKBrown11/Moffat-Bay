@@ -183,6 +183,7 @@ public class MBValidator {
 	}
 	
 	public boolean checkFullName(String rawFullName) {
+		System.out.println(rawFullName);
 		if (rawFullName.matches(fullNameReg)) {
 			System.out.println("raw input matched regex for full name");
 			return true;
