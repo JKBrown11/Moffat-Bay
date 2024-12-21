@@ -39,7 +39,7 @@
 		<input type="hidden" name="myrequest" value="cancel" />
 		<input type="submit" name="cancel-btn" value="Cancel" />
 	</form>
-	${successMsg};
+	${successMsg}
 	
 	</div> 
 	</div>

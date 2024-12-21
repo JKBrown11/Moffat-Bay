@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attractions - Moffat Bay Resort</title>
     <link rel="stylesheet" href="CSS/moffat2.css">
+<!--     <link rel="stylesheet" href="CSS/attractions2.css"> -->
 </head>
 <body>
 <%@ include file="CSS/nav_menu.html"%>
