@@ -32,9 +32,10 @@
     <input type="text" id="phone" name="phone" placeholder="xxx-xxx-xxxx" required>
     <span class = "errorMessages">${phoneErr}</span>
     
-    <label for="age">Age:</label>
+    <%-- <label for="age">Age:</label>
     <input type="number" id="age" name="age" placeholder="99" required>
     <span class = "errorMessages">${ageErr}</span>
+    --%>
     
     <label for="password">Password:</label>
     <input type="password" id="password" name="regPass" placeholder="Create a password" required>
@@ -42,6 +43,10 @@
 	
     <label for="confirm-password">Confirm Password:</label>
     <input type="password" id="confirm-password" name="repeatPass" placeholder="Confirm your password" required>
+    
+    <label for="age-confirmation">I confirm that I am over the age of 18:</label>
+    <input type="checkbox" id="age-confirmation" name="ageConfirmation" value="over18" required>
+    <span class="errorMessages">${ageErr}</span>
 
 	<input type="hidden" name="myrequest" value="register"/>
     <input type="submit" value="Register">
