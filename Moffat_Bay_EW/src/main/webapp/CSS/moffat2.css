@@ -7,6 +7,11 @@ body {
   background-attachment: fixed; 
 
 }
+header {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
 
 .banner{
     position: relative;

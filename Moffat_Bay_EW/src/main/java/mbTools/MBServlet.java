@@ -65,7 +65,7 @@ public class MBServlet extends HttpServlet {
 				String rawLastName = request.getParameter("lastName");
 				String rawEmail = request.getParameter("email");
 				String rawPhone = request.getParameter("phone");
-				int intAge = Integer.parseInt(request.getParameter("age"));
+				String rawAge = request.getParameter("age");
 				String rawRegPass = request.getParameter("regPass");
 				System.out.println("values retreived from form");
 
@@ -125,8 +125,8 @@ public class MBServlet extends HttpServlet {
 
 				//Only allow accounts for 18 or older, excepting irrationally large ages.
 				// Only used once, so no function created. 
-/*age*/			if ( intAge >= 18 && intAge <= 105) {
-					registerNew.setAge(intAge);
+/*age*/			if ( rawAge.contains("over18")) {
+					registerNew.setAge(18);
 					age = true;
 					System.out.println("age true");
 				}
