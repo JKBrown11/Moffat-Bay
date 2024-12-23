@@ -41,11 +41,11 @@
     <input type="password" id="password" name="regPass" placeholder="Create a password" required>
 	<span class = "errorMessages">${regPassErr}</span>
 	
-    <label for="confirm-password">Confirm Password:</label>
-    <input type="password" id="confirm-password" name="repeatPass" placeholder="Confirm your password" required>
+<!--     <label for="confirm-password">Confirm Password:</label> -->
+<!--     <input type="password" id="confirm-password" name="repeatPass" placeholder="Confirm your password" required> -->
     
     <label for="age-confirmation">I confirm that I am over the age of 18:</label>
-    <input type="checkbox" id="age-confirmation" name="ageConfirmation" value="over18" required>
+    <input type="checkbox" id="age-confirmation" name="age" value="over18" required>
     <span class="errorMessages">${ageErr}</span>
 
 	<input type="hidden" name="myrequest" value="register"/>
